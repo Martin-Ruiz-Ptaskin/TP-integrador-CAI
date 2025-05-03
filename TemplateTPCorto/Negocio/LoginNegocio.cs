@@ -33,6 +33,11 @@ namespace Negocio
             return usuarioPersistencia.ValidarUsuarioBloqueado(legajo);
         }
 
+        public List<string> obtenerRolesPorLegajo(string legajo)
+        {
+            return usuarioPersistencia.obtenerRolesPorLegajo(legajo);
+        }
+
         public string obtenerLegajoPorNombre(String username)
         {
             return usuarioPersistencia.obtenerLegajoPorNombre(username);
