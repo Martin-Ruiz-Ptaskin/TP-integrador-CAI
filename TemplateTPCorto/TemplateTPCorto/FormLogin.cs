@@ -30,6 +30,7 @@ namespace TemplateTPCorto
             LoginNegocio loginNegocio = new LoginNegocio();
             
             Credencial credencial = loginNegocio.login(usuario, password);
+            var legajo = loginNegocio.obtenerLegajoPorNombre(usuario);
 
             if (credencial != null)
             {
@@ -54,14 +55,14 @@ namespace TemplateTPCorto
                     else
                     {
                         MessageBox.Show("¡Inicio de sesión exitoso!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        this.Hide();
+                        Menu menu = new Menu(legajo, usuario);
+                        menu.Show();
                     }
                 }
             }
             else
             {
-
-
-                var legajo = loginNegocio.obtenerLegajoPorNombre(usuario);
                 var usuarioBloqueado = loginNegocio.ValidarUsuarioBloqueado(legajo);
 
                 if (legajo != null)
