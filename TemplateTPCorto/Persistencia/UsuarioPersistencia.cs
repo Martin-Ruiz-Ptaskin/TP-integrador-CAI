@@ -49,7 +49,6 @@ namespace Persistencia
 
         public Boolean ValidarUsuarioSiSeDebeBloquear(string legajo)
         {
-            {
                 var registros = dataBaseUtils.BuscarRegistro("login_intentos.csv");
                 if (registros != null && registros.Count > 0)
                 {
@@ -67,7 +66,6 @@ namespace Persistencia
 
                 // Si no hay registros o no se alcanzaron 3 intentos, no está bloqueado
                 return false;
-            }
         }
 
         public Boolean ValidarUsuarioBloqueado(string legajo)
@@ -86,7 +84,6 @@ namespace Persistencia
             // Si no hay registros o el legajo no está en la lista, no está bloqueado
             return false;
         }
-        
 
         public void agregarIntentoDeLogin(string legajo)
         {
@@ -100,11 +97,13 @@ namespace Persistencia
             
 
         }
+
         public void bloquearUsuario (string legajo)
         {
             dataBaseUtils.AgregarRegistro("usuario_bloqueado.csv", legajo+";");
 
         }
+
         public string obtenerLegajoPorNombre(String username)
         {
             try
@@ -136,7 +135,20 @@ namespace Persistencia
                 return null;
             }
         }
-    }
+
+        public Boolean cambiarContrasena(String legajo, String nuevaContrasena)
+        {
+            try
+            {
+                return dataBaseUtils.ModificarContrasenaPorLegajo(legajo, nuevaContrasena, "credenciales.csv");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error en el método cambiarContrasena: {ex.Message}");
+            }
+            return false;
+        }
+     }
 }
 
 

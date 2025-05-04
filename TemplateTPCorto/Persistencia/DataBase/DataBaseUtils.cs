@@ -107,6 +107,38 @@ namespace Persistencia.DataBase
                 Console.WriteLine($"Pila de errores: {e.StackTrace}");
             }
         }
+
+        public Boolean ModificarContrasenaPorLegajo(string legajo, string nuevaContrasena, string nombreArchivo)
+        {
+            string rutaArchivo = Path.Combine(archivoCsv, nombreArchivo);
+            try
+            {
+                List<string> listado = BuscarRegistro(nombreArchivo);
+                var registrosPorCargar = listado.Where(linea =>
+                {
+                    var campos = linea.Split(';');
+                    return campos[0] != legajo;
+                }).ToList();
+                var usuarioAModificar = listado.FirstOrDefault(linea =>
+                {
+                    var campos = linea.Split(';');
+                    return campos[0] == legajo;
+                });
+                var datosUsuario = usuarioAModificar.Split(';');
+                datosUsuario[2] = nuevaContrasena; // Cambiar la contraseña
+                datosUsuario[4] = DateTime.Now.ToString("d/M/yyyy"); // Actualizar la fecha de último login
+                var usuarioActualizado = string.Join(";", datosUsuario);
+                registrosPorCargar.Add(usuarioActualizado);
+                File.WriteAllLines(rutaArchivo, registrosPorCargar);
+                Console.WriteLine($"Contraseña modificada correctamente para el legajo {legajo}.");
+                return true;
+            }
+            catch (Exception e)
+            {;
+                Console.WriteLine($"Error al intentar modificar la contraseña: {e.Message}");
+            }
+            return false;
+        }
     }
 }
 

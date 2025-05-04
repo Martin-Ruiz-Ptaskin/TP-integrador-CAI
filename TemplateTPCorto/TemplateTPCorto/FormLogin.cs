@@ -39,7 +39,22 @@ namespace TemplateTPCorto
 
                 }
                 else {
-                    MessageBox.Show("¡Inicio de sesión exitoso!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    // Verificar si es el primer login, si es enviar a la pantalla de actualizacion. si no, login exitoso.
+                    bool esPrimerLogin = credencial.FechaUltimoLogin == null;
+                    if (esPrimerLogin)
+                    {
+                        DialogResult messageBoxResponse = MessageBox.Show("Usted debe cambiar su contraseña", "Primer LogIn", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        if(messageBoxResponse == DialogResult.OK)
+                        {
+                            this.Hide();
+                            FormCambioObligatorioContrasena formCambioObligatorioContrasena = new FormCambioObligatorioContrasena(credencial);
+                            formCambioObligatorioContrasena.Show();
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("¡Inicio de sesión exitoso!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
                 }
             }
             else
