@@ -42,5 +42,9 @@ namespace Negocio
         {
             return usuarioPersistencia.obtenerLegajoPorNombre(username);
         }
+        public bool actualizarFechaLogin(string legajo)
+        {
+            return usuarioPersistencia.actualizarFechaLogin(legajo);
+        }
     }
 }

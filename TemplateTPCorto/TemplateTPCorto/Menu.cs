@@ -17,9 +17,10 @@ namespace TemplateTPCorto
     {
         private string legajo;
         private string usuario;
+        private Credencial credencial;
         private List<string> roles;
 
-        public Menu(string _legajo, string _usuario)
+        public Menu(string _legajo, string _usuario, Credencial _credencial)
         {
             InitializeComponent();
             legajo = _legajo;
@@ -28,7 +29,7 @@ namespace TemplateTPCorto
             gbAdministrador.Visible = false;
             gbOperador.Visible = false;
             mostrarFuncionesSegunRol(legajo);
-           
+            credencial = _credencial;
         }
         LoginNegocio loginNegocio = new LoginNegocio();
         //            roles = loginNegocio.obtenerRolesPorLegajo(legajo);
@@ -76,6 +77,10 @@ namespace TemplateTPCorto
 
         }
 
-       
+        private void btnCambiarContrasena_Click(object sender, EventArgs e)
+        {
+            FormCambioObligatorioContrasena formCambioObligatorioContrasena = new FormCambioObligatorioContrasena(credencial);
+            formCambioObligatorioContrasena.Show();
+        }
     }
 }

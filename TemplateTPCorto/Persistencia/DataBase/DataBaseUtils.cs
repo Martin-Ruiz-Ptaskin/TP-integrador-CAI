@@ -139,6 +139,49 @@ namespace Persistencia.DataBase
             }
             return false;
         }
+        public Boolean ModificarFechaPorLegajo(string legajo, string nombreArchivo)
+        {
+            string rutaArchivo = Path.Combine(archivoCsv, nombreArchivo);
+            try
+            {
+                List<string> listado = BuscarRegistro(nombreArchivo);
+                var registrosPorCargar = listado.Where(linea =>
+                {
+                    var campos = linea.Split(';');
+                    return campos[0] != legajo;
+                }).ToList();
+
+                var usuarioAModificar = listado.FirstOrDefault(linea =>
+                {
+                    var campos = linea.Split(';');
+                    return campos[0] == legajo;
+                });
+
+                if (usuarioAModificar == null)
+                {
+                    Console.WriteLine($"No se encontró un usuario con el legajo {legajo}.");
+                    return false;
+                }
+
+                var datosUsuario = usuarioAModificar.Split(';');
+                // datosUsuario[2] = nuevaContrasena; // Ya no modificamos la contraseña
+                datosUsuario[4] = DateTime.Now.ToString("d/M/yyyy"); // Actualizar solo la fecha
+
+                var usuarioActualizado = string.Join(";", datosUsuario);
+                registrosPorCargar.Add(usuarioActualizado);
+                File.WriteAllLines(rutaArchivo, registrosPorCargar);
+
+                Console.WriteLine($"Fecha actualizada correctamente para el legajo {legajo}.");
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Error al intentar modificar la fecha: {e.Message}");
+            }
+
+            return false;
+        }
+
     }
 }
 
