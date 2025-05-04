@@ -164,7 +164,6 @@ namespace Persistencia.DataBase
                 }
 
                 var datosUsuario = usuarioAModificar.Split(';');
-                // datosUsuario[2] = nuevaContrasena; // Ya no modificamos la contraseña
                 datosUsuario[4] = DateTime.Now.ToString("d/M/yyyy"); // Actualizar solo la fecha
 
                 var usuarioActualizado = string.Join(";", datosUsuario);
