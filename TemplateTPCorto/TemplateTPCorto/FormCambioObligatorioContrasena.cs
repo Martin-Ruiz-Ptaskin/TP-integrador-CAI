@@ -25,18 +25,27 @@ namespace TemplateTPCorto
         {
             CambioContrasenaNegocio cambioContrasenaNegocio = new CambioContrasenaNegocio();
             String nuevaContrasena = NuevaContrasenaTxt.Text;
-            bool cambioExitoso = cambioContrasenaNegocio.cambioObligatorio(_credencial.Legajo, nuevaContrasena);
-            if (cambioExitoso)
+            if(_credencial.Contrasena != nuevaContrasena)
             {
-                MessageBox.Show("Su contraseña fue modificada correctamente", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.Hide();
-                FormLogin formLogin = new FormLogin();
-                formLogin.Show();
+                bool cambioExitoso = cambioContrasenaNegocio.cambioObligatorio(_credencial.Legajo, nuevaContrasena);
+                if (cambioExitoso)
+                {
+                    MessageBox.Show("Su contraseña fue modificada correctamente", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Hide();
+                    FormLogin formLogin = new FormLogin();
+                    formLogin.Show();
+                }
+                else
+                {
+                    MessageBox.Show("Error al cambiar la contraseña, intente nuevamente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             else
             {
-                MessageBox.Show("Error al cambiar la contraseña, intente nuevamente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("La nueva contraseña no puede ser igual a la anterior", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
+            
         }
 
         private void NuevaContrasenaTxt_TextChanged(object sender, EventArgs e)
