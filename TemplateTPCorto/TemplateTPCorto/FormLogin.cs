@@ -40,10 +40,7 @@ namespace TemplateTPCorto
 
                 }
                 else {
-                    this.Hide();
-                    Menu menu = new Menu(legajo, usuario);
-                    menu.Show();
-                    //MessageBox.Show("¡Inicio de sesión exitoso!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("¡Inicio de sesión exitoso!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             else

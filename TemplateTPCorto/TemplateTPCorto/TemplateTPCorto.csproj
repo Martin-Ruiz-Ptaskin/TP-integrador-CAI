@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FormCambioObligatorioContrasena.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormCambioObligatorioContrasena.Designer.cs">
+      <DependentUpon>FormCambioObligatorioContrasena.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -60,6 +66,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FormCambioObligatorioContrasena.resx">
+      <DependentUpon>FormCambioObligatorioContrasena.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormLogin.resx">
       <DependentUpon>FormLogin.cs</DependentUpon>
     </EmbeddedResource>
