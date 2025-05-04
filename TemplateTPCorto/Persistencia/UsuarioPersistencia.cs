@@ -148,7 +148,40 @@ namespace Persistencia
             }
             return false;
         }
-     }
+
+        public List<string> obtenerRolesPorLegajo(string legajo)
+        {
+            List<string> roles = new List<string>();
+
+            try
+            {
+                var registros = dataBaseUtils.BuscarRegistro("usuario_perfil.csv");
+
+                if (registros != null && registros.Count > 0)
+                {
+                    foreach (var registro in registros)
+                    {
+                        var columnas = registro.Split(';');
+
+                        if (columnas.Length >= 2 && columnas[0].Equals(legajo, StringComparison.OrdinalIgnoreCase))
+                        {
+                            string rol = columnas[1].Trim();
+                            if (!string.IsNullOrEmpty(rol))
+                            {
+                                roles.Add(rol);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error en obtenerRolesPorLegajo: {ex.Message}");
+            }
+
+            return roles;
+        }
+    }
 }
 
 
