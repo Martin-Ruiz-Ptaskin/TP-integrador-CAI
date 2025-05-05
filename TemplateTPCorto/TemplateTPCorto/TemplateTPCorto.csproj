@@ -46,6 +46,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PersonasForms\ListaPersonas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PersonasForms\ListaPersonas.Designer.cs">
+      <DependentUpon>ListaPersonas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PersonasForms\ModificarPersona.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PersonasForms\ModificarPersona.Designer.cs">
+      <DependentUpon>ModificarPersona.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormCambioObligatorioContrasena.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -74,6 +86,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Menu.resx">
       <DependentUpon>Menu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PersonasForms\ListaPersonas.resx">
+      <DependentUpon>ListaPersonas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PersonasForms\ModificarPersona.resx">
+      <DependentUpon>ModificarPersona.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

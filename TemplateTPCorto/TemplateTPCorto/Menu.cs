@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TemplateTPCorto.PersonasForms;
 
 namespace TemplateTPCorto
 {
@@ -69,7 +70,8 @@ namespace TemplateTPCorto
 
         private void btnModificarPersona_Click(object sender, EventArgs e)
         {
-
+            ListaPersonas listaPersonas = new ListaPersonas();
+            listaPersonas.Show();
         }
 
         private void btnOperador_Click(object sender, EventArgs e)
