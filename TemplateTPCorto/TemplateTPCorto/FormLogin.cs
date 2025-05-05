@@ -19,7 +19,7 @@ namespace TemplateTPCorto
         {
             InitializeComponent();
             txtUsuario.Text = "zachary.mills";
-            txtPassword.Text = "+OEDT#4j97";
+            txtPassword.Text = "HolaComo";
         }
 
         private void btnIngresar_Click(object sender, EventArgs e)

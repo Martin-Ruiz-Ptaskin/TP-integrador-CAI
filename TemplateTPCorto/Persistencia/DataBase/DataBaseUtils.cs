@@ -181,6 +181,42 @@ namespace Persistencia.DataBase
             return false;
         }
 
+    
+
+
+     public void ModificarRegistro(string nombreArchivo, string id, string nuevoRegistro)
+        {
+            // Construir la ruta completa sin modificar archivoCsv
+            string rutaArchivo = Path.Combine(archivoCsv, nombreArchivo);
+            try
+            {
+                // Verificar si el archivo existe
+                if (!File.Exists(rutaArchivo))
+                {
+                    Console.WriteLine("El archivo no existe: " + rutaArchivo);
+                    return;
+                }
+                // Leer el archivo y obtener las líneas
+                List<string> listado = BuscarRegistro(nombreArchivo);
+                // Filtrar las líneas que no coinciden con el ID a modificar (comparar solo la primera columna)
+                var registrosRestantes = listado.Where(linea =>
+                {
+                    var campos = linea.Split(';');
+                    return campos[0] != id; // Verifica solo el ID (primera columna)
+                }).ToList();
+                // Agregar el nuevo registro al final de la lista
+                registrosRestantes.Add(nuevoRegistro);
+                // Sobrescribir el archivo con las líneas restantes y el nuevo registro
+                File.WriteAllLines(rutaArchivo, registrosRestantes);
+                Console.WriteLine($"Registro con ID {id} modificado correctamente.");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error al intentar modificar el registro:");
+                Console.WriteLine($"Mensaje: {e.Message}");
+                Console.WriteLine($"Pila de errores: {e.StackTrace}");
+            }
+        }
     }
 }
 
