@@ -54,10 +54,26 @@ namespace TemplateTPCorto
                     }
                     else
                     {
-                        MessageBox.Show("¡Inicio de sesión exitoso!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        this.Hide();
-                        Menu menu = new Menu(legajo, usuario);
-                        menu.Show();
+                        bool contrasenaVencida = credencial.FechaUltimoLogin < DateTime.Now.AddDays(-30);
+                        if (contrasenaVencida)
+                        {
+                            DialogResult messageBoxResponse = MessageBox.Show("Usted debe cambiar su contraseña", "Contraseña Vencida", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            if (messageBoxResponse == DialogResult.OK)
+                            {
+                                this.Hide();
+                                FormCambioObligatorioContrasena formCambioObligatorioContrasena = new FormCambioObligatorioContrasena(credencial);
+                                formCambioObligatorioContrasena.Show();
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("¡Inicio de sesión exitoso!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            // Segun consigna tenemos que actualizar la fecha en cada Inicio de Sesion
+                            loginNegocio.actualizarFechaLogin(legajo);
+                            this.Hide();
+                            Menu menu = new Menu(legajo, usuario, credencial);
+                            menu.Show();
+                        }
                     }
                 }
             }

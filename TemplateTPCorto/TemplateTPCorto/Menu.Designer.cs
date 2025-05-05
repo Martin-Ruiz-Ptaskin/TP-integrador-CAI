@@ -35,6 +35,7 @@
             this.gbSupervisor = new System.Windows.Forms.GroupBox();
             this.gbAdministrador = new System.Windows.Forms.GroupBox();
             this.gbOperador = new System.Windows.Forms.GroupBox();
+            this.btnCambiarContrasena = new System.Windows.Forms.Button();
             this.gbSupervisor.SuspendLayout();
             this.gbAdministrador.SuspendLayout();
             this.gbOperador.SuspendLayout();
@@ -108,11 +109,22 @@
             this.gbOperador.TabIndex = 6;
             this.gbOperador.TabStop = false;
             // 
+            // btnCambiarContrasena
+            // 
+            this.btnCambiarContrasena.Location = new System.Drawing.Point(127, 306);
+            this.btnCambiarContrasena.Name = "btnCambiarContrasena";
+            this.btnCambiarContrasena.Size = new System.Drawing.Size(487, 40);
+            this.btnCambiarContrasena.TabIndex = 7;
+            this.btnCambiarContrasena.Text = "Cambiar contrasena";
+            this.btnCambiarContrasena.UseVisualStyleBackColor = true;
+            this.btnCambiarContrasena.Click += new System.EventHandler(this.btnCambiarContrasena_Click);
+            // 
             // Menu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnCambiarContrasena);
             this.Controls.Add(this.gbOperador);
             this.Controls.Add(this.gbAdministrador);
             this.Controls.Add(this.gbSupervisor);
@@ -134,5 +146,6 @@
         private System.Windows.Forms.GroupBox gbSupervisor;
         private System.Windows.Forms.GroupBox gbAdministrador;
         private System.Windows.Forms.GroupBox gbOperador;
+        private System.Windows.Forms.Button btnCambiarContrasena;
     }
 }

@@ -149,6 +149,19 @@ namespace Persistencia
             return false;
         }
 
+        public Boolean actualizarFechaLogin(String legajo)
+        {
+            try
+            {
+                return dataBaseUtils.ModificarFechaPorLegajo(legajo, "credenciales.csv");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error en el método actualizarFechaLogin: {ex.Message}");
+            }
+            return false;
+        }
+
         public List<string> obtenerRolesPorLegajo(string legajo)
         {
             List<string> roles = new List<string>();
