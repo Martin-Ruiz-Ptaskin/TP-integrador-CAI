@@ -37,8 +37,6 @@ namespace TemplateTPCorto
                 CambioContrasenaLbl.Visible = true;
                 NuevaContrasenaTxt.Visible = true;
                 ConfirmarCambioBtn.Visible = true;
-                // Completar los campos de usuario
-
             }
         }
 
@@ -68,25 +66,6 @@ namespace TemplateTPCorto
             {
                 MessageBox.Show("Error al agregar la operacion", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            /*  TO-DO Mover esta logica a la pantalla de ADMINISTRADOR!, aca solo persistir operacion sin ejecutar.
-            bool cambioExitoso = cambioContrasenaNegocio.CambioContrasena(personaSeleccionada.Legajo, nuevaContrasena, true);
-            if (cambioExitoso)
-            {
-                bool desbloqueoExitoso = cambioContrasenaNegocio.DesbloquearCredencial(personaSeleccionada.Legajo);
-                if (desbloqueoExitoso)
-                {
-                    MessageBox.Show($"El usuario: {personaSeleccionada.Legajo} - {personaSeleccionada.Nombre} {personaSeleccionada.Apellido}, fue desbloqueado", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else
-                {
-                    MessageBox.Show("Error al desbloquear el usuario, intente nuevamente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            else
-            {
-                MessageBox.Show("Error al desbloquear el usuario, intente nuevamente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            */
         }
     }
 }

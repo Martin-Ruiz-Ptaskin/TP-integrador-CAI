@@ -65,7 +65,8 @@ namespace TemplateTPCorto
 
         private void btnAutorizaciones_Click(object sender, EventArgs e)
         {
-
+            FormAdministrador formAdministrador = new FormAdministrador();
+            formAdministrador.Show();
         }
 
         private void btnModificarPersona_Click(object sender, EventArgs e)

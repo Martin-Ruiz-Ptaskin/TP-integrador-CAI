@@ -199,7 +199,7 @@ namespace Persistencia
         {
             try
             {
-                return dataBaseUtils.DesbloquearCredencial(legajo, "usuario_bloqueado.csv");
+                return dataBaseUtils.DesbloquearCredencial(legajo, "usuario_bloqueado.csv", "login_intentos.csv");
             }
             catch (Exception ex)
             {

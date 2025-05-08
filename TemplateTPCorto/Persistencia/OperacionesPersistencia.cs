@@ -1,4 +1,5 @@
-﻿using Persistencia.DataBase;
+﻿using Datos;
+using Persistencia.DataBase;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +23,49 @@ namespace Persistencia
                 Console.WriteLine($"Error en el método debloquear credencial: {ex.Message}");
             }
             return false;
+        }
+
+        public Boolean EliminarOperacionDesbloqueo(String idOperacion)
+        {
+            try
+            {
+                return dataBaseUtils.EliminarOperacionDesbloqueo(idOperacion, "operacion_cambio_credencial.csv");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error en el método debloquear credencial: {ex.Message}");
+            }
+            return false;
+        }
+
+        public List<OperacionesDesbloqueo> obtenerOperacionesDeDesbloqueo()
+        {
+            List<OperacionesDesbloqueo> operacionesDesbloqueos = new List<OperacionesDesbloqueo>();
+            List<String> listado = dataBaseUtils.BuscarRegistro("operacion_cambio_credencial.csv");
+
+            if (listado != null && listado.Count > 0)
+            {
+                listado.RemoveAt(0);
+
+                foreach (String operacionActual in listado)
+                {
+                    try
+                    {
+                        OperacionesDesbloqueo operacion = new OperacionesDesbloqueo(operacionActual);
+                        operacionesDesbloqueos.Add(operacion);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Error al obtener las personas: {ex.Message}");
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("No se encontraron registros en el archivo operacion_cambio_credencial.csv.");
+            }
+
+            return operacionesDesbloqueos;
         }
     }
 }

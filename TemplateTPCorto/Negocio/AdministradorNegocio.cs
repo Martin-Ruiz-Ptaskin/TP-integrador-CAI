@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Negocio
 {
-    public class OperacionesNegocio
+    public class AdministradorNegocio
     {
         private OperacionesPersistencia operacionesPersistencia = new OperacionesPersistencia();
 
@@ -17,15 +17,6 @@ namespace Negocio
            return operacionesPersistencia.AgregarOperacionDesbloqueo(legajo, nuevaContrasena);
         }
 
-        public List<OperacionesDesbloqueo> obtenerOperaciones()
-        {
-            List<OperacionesDesbloqueo> operacionesDesbloqueo = operacionesPersistencia.obtenerOperacionesDeDesbloqueo();
-            return operacionesDesbloqueo;
-        }
-
-        public Boolean EliminarOperacionPendiente(String idOperacion)
-        {
-            return operacionesPersistencia.EliminarOperacionDesbloqueo(idOperacion);
-        }
+        
     }
 }

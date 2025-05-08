@@ -221,18 +221,26 @@ namespace Persistencia.DataBase
                 }
          }
 
-        public Boolean DesbloquearCredencial(string legajo, string nombreArchivo)
+        public Boolean DesbloquearCredencial(string legajo, string nombreArchivoUsuariosBloqueados, string nombreArchivoIntentosLogin )
         {
-            string rutaArchivo = Path.Combine(archivoCsv, nombreArchivo);
+            string rutaArchivoUsuariosBloqueados = Path.Combine(archivoCsv, nombreArchivoUsuariosBloqueados);
+            string rutaArchivoIntentosLogin = Path.Combine(archivoCsv, nombreArchivoIntentosLogin);
             try
             {
-                List<string> listado = BuscarRegistro(nombreArchivo);
+                List<string> listado = BuscarRegistro(nombreArchivoUsuariosBloqueados);
                 var registrosPorMantener = listado.Where(linea =>
                 {
                     var campos = linea.Split(';');
                     return campos[0] != legajo;
                 }).ToList();
-                File.WriteAllLines(rutaArchivo, registrosPorMantener);
+                File.WriteAllLines(rutaArchivoUsuariosBloqueados, registrosPorMantener);
+                List<string> listadoIntentosLogin = BuscarRegistro(nombreArchivoIntentosLogin);
+                var registrosPorMantenerLogin = listado.Where(linea =>
+                {
+                    var campos = linea.Split(';');
+                    return campos[0] != legajo;
+                }).ToList();
+                File.WriteAllLines(rutaArchivoIntentosLogin, registrosPorMantenerLogin);
                 Console.WriteLine($"El usuario {legajo} fue desbloqueado.");
                 return true;
             }
@@ -280,6 +288,31 @@ namespace Persistencia.DataBase
             {
                 ;
                 Console.WriteLine($"Error al persistir la operacion: {e.Message}");
+            }
+            return false;
+        }
+
+
+        public Boolean EliminarOperacionDesbloqueo(string idOperacion, string archivoOperaciones)
+        {
+            string rutaOperaciones = Path.Combine(archivoCsv, archivoOperaciones);
+            try
+            {
+                List<string> listadoOperaciones = BuscarRegistro(archivoOperaciones);
+                var registrosPorCargar = listadoOperaciones.Where(linea =>
+                {
+                    var campos = linea.Split(';');
+                    return campos[0] != idOperacion;
+                }).ToList();
+               
+                File.WriteAllLines(rutaOperaciones, registrosPorCargar);
+                Console.WriteLine($"Operacion eliminada a persistencia");
+                return true;
+            }
+            catch (Exception e)
+            {
+                ;
+                Console.WriteLine($"Error al eliminar la operacion: {e.Message}");
             }
             return false;
         }
