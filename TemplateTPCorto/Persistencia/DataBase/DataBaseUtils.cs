@@ -235,7 +235,7 @@ namespace Persistencia.DataBase
                 }).ToList();
                 File.WriteAllLines(rutaArchivoUsuariosBloqueados, registrosPorMantener);
                 List<string> listadoIntentosLogin = BuscarRegistro(nombreArchivoIntentosLogin);
-                var registrosPorMantenerLogin = listado.Where(linea =>
+                var registrosPorMantenerLogin = listadoIntentosLogin.Where(linea =>
                 {
                     var campos = linea.Split(';');
                     return campos[0] != legajo;
