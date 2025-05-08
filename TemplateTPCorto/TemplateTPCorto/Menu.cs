@@ -59,8 +59,8 @@ namespace TemplateTPCorto
 
         private void btnDesbloquearCredencial_Click(object sender, EventArgs e)
         {
-
-            
+            FormDesbloquearCredencial desbloquearCredencial = new FormDesbloquearCredencial();
+            desbloquearCredencial.Show();
         }
 
         private void btnAutorizaciones_Click(object sender, EventArgs e)
@@ -81,7 +81,7 @@ namespace TemplateTPCorto
 
         private void btnCambiarContrasena_Click(object sender, EventArgs e)
         {
-            FormCambioObligatorioContrasena formCambioObligatorioContrasena = new FormCambioObligatorioContrasena(credencial);
+            FormCambioContrasena formCambioObligatorioContrasena = new FormCambioContrasena(credencial);
             formCambioObligatorioContrasena.Show();
         }
     }

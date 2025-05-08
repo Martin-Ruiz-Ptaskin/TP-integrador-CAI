@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FormDesbloquearCredencial.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormDesbloquearCredencial.Designer.cs">
+      <DependentUpon>FormDesbloquearCredencial.cs</DependentUpon>
+    </Compile>
     <Compile Include="PersonasForms\ListaPersonas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -58,11 +64,11 @@
     <Compile Include="PersonasForms\ModificarPersona.Designer.cs">
       <DependentUpon>ModificarPersona.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormCambioObligatorioContrasena.cs">
+    <Compile Include="FormCambioContrasena.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormCambioObligatorioContrasena.Designer.cs">
-      <DependentUpon>FormCambioObligatorioContrasena.cs</DependentUpon>
+    <Compile Include="FormCambioContrasena.Designer.cs">
+      <DependentUpon>FormCambioContrasena.cs</DependentUpon>
     </Compile>
     <Compile Include="FormLogin.cs">
       <SubType>Form</SubType>
@@ -78,8 +84,11 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="FormCambioObligatorioContrasena.resx">
-      <DependentUpon>FormCambioObligatorioContrasena.cs</DependentUpon>
+    <EmbeddedResource Include="FormDesbloquearCredencial.resx">
+      <DependentUpon>FormDesbloquearCredencial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormCambioContrasena.resx">
+      <DependentUpon>FormCambioContrasena.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormLogin.resx">
       <DependentUpon>FormLogin.cs</DependentUpon>

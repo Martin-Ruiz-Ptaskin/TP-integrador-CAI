@@ -1,6 +1,6 @@
 ﻿namespace TemplateTPCorto
 {
-    partial class FormCambioObligatorioContrasena
+    partial class FormCambioContrasena
     {
         /// <summary>
         /// Required designer variable.
