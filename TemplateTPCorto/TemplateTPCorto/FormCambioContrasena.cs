@@ -12,10 +12,10 @@ using System.Windows.Forms;
 
 namespace TemplateTPCorto
 {
-    public partial class FormCambioObligatorioContrasena : Form
+    public partial class FormCambioContrasena : Form
     {
         private Credencial _credencial;
-        public FormCambioObligatorioContrasena(Credencial credencial)
+        public FormCambioContrasena(Credencial credencial)
         {
             InitializeComponent();
             _credencial = credencial;
@@ -27,7 +27,7 @@ namespace TemplateTPCorto
             String nuevaContrasena = NuevaContrasenaTxt.Text;
             if(_credencial.Contrasena != nuevaContrasena)
             {
-                bool cambioExitoso = cambioContrasenaNegocio.cambioObligatorio(_credencial.Legajo, nuevaContrasena);
+                bool cambioExitoso = cambioContrasenaNegocio.CambioContrasena(_credencial.Legajo, nuevaContrasena);
                 if (cambioExitoso)
                 {
                     MessageBox.Show("Su contraseña fue modificada correctamente", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);

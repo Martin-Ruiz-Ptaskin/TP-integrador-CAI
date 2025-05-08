@@ -12,9 +12,14 @@ namespace Negocio
     {
         private UsuarioPersistencia usuarioPersistencia = new UsuarioPersistencia();
 
-        public Boolean cambioObligatorio(String legajo, String nuevaContrasena)
+        public Boolean CambioContrasena(String legajo, String nuevaContrasena, Boolean? esDesbloqueo = null)
         {
-           return usuarioPersistencia.cambiarContrasena(legajo, nuevaContrasena);
+           return usuarioPersistencia.cambiarContrasena(legajo, nuevaContrasena, esDesbloqueo);
+        }
+
+        public Boolean DesbloquearCredencial(String legajo)
+        {
+            return usuarioPersistencia.desbloquearCredencial(legajo);
         }
     }
 }

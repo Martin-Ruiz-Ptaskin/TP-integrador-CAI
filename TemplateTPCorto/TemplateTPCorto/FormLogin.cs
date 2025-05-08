@@ -18,7 +18,7 @@ namespace TemplateTPCorto
         public FormLogin()
         {
             InitializeComponent();
-            txtUsuario.Text = "zachary.mills";
+            txtUsuario.Text = "timothy.harrison";
             txtPassword.Text = "HolaComo";
         }
 
@@ -48,7 +48,7 @@ namespace TemplateTPCorto
                         if(messageBoxResponse == DialogResult.OK)
                         {
                             this.Hide();
-                            FormCambioObligatorioContrasena formCambioObligatorioContrasena = new FormCambioObligatorioContrasena(credencial);
+                            FormCambioContrasena formCambioObligatorioContrasena = new FormCambioContrasena(credencial);
                             formCambioObligatorioContrasena.Show();
                         }
                     }
@@ -61,7 +61,7 @@ namespace TemplateTPCorto
                             if (messageBoxResponse == DialogResult.OK)
                             {
                                 this.Hide();
-                                FormCambioObligatorioContrasena formCambioObligatorioContrasena = new FormCambioObligatorioContrasena(credencial);
+                                FormCambioContrasena formCambioObligatorioContrasena = new FormCambioContrasena(credencial);
                                 formCambioObligatorioContrasena.Show();
                             }
                         }

@@ -136,11 +136,11 @@ namespace Persistencia
             }
         }
 
-        public Boolean cambiarContrasena(String legajo, String nuevaContrasena)
+        public Boolean cambiarContrasena(String legajo, String nuevaContrasena, Boolean? esDesbloqueo)
         {
             try
             {
-                return dataBaseUtils.ModificarContrasenaPorLegajo(legajo, nuevaContrasena, "credenciales.csv");
+                return dataBaseUtils.ModificarContrasenaPorLegajo(legajo, nuevaContrasena, "credenciales.csv", esDesbloqueo);
             }
             catch (Exception ex)
             {
@@ -194,6 +194,20 @@ namespace Persistencia
 
             return roles;
         }
+
+        public Boolean desbloquearCredencial(String legajo)
+        {
+            try
+            {
+                return dataBaseUtils.DesbloquearCredencial(legajo, "usuario_bloqueado.csv", "login_intentos.csv");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error en el método debloquear credencial: {ex.Message}");
+            }
+            return false;
+        }
+
     }
 }
 
