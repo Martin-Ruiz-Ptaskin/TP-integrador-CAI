@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -44,6 +45,13 @@ namespace Datos
             {
                 Console.WriteLine($"Error al procesar el registro: {operacion}. Detalles: {ex.Message}");
                 throw;
+            }
+        }
+        public string DisplayInfo
+        {
+            get
+            {
+                return $"{Legajo} - {NombreUsuario}";
             }
         }
     }
