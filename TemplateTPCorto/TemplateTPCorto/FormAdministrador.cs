@@ -22,7 +22,7 @@ namespace TemplateTPCorto
             List<Datos.OperacionesDesbloqueo> operacionesDeDesbloqueo = new List<Datos.OperacionesDesbloqueo>();
             operacionesDeDesbloqueo = operacionesNegocio.obtenerOperaciones();
             OperacionesDesbloqueoListBox.SelectedIndexChanged -= OperacionesDesbloqueoListBox_SelectedIndexChanged;
-            OperacionesDesbloqueoListBox.DisplayMember = "NombreUsuario";
+            OperacionesDesbloqueoListBox.DisplayMember = "DisplayInfo";
             OperacionesDesbloqueoListBox.DataSource = operacionesDeDesbloqueo;
             OperacionesDesbloqueoListBox.SelectedIndexChanged += OperacionesDesbloqueoListBox_SelectedIndexChanged;
         }
