@@ -128,10 +128,7 @@ namespace TemplateTPCorto
          }*/
         }
 
-        private void AprobarModificacionBtn_Click_1(object sender, EventArgs e)
-        {
-
-        }
+       
 
         private void AprobarModificacionBtn_Click_2(object sender, EventArgs e)
         {
