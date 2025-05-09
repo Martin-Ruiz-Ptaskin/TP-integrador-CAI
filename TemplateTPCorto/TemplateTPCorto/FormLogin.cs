@@ -1,4 +1,5 @@
 ﻿using Datos;
+using Datos.modelos;
 using Negocio;
 using System;
 
@@ -18,8 +19,8 @@ namespace TemplateTPCorto
         public FormLogin()
         {
             InitializeComponent();
-            txtUsuario.Text = "timothy.harrison";
-            txtPassword.Text = "HolaComo";
+            txtUsuario.Text = "craig.haynes";
+            txtPassword.Text = "12345678";
         }
 
         private void btnIngresar_Click(object sender, EventArgs e)
@@ -68,6 +69,14 @@ namespace TemplateTPCorto
                         else
                         {
                             MessageBox.Show("¡Inicio de sesión exitoso!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            AppState.UsuarioActual = new Persona
+                            {
+                                Legajo = credencial.Legajo,
+                                Nombre = usuario,
+                                Apellido = "", // Si tienes el apellido, asignarlo aquí
+                                Dni = "", // Si tienes el DNI, asignarlo aquí
+                                FechaIngreso = DateTime.Now // Ajustar según los datos disponibles
+                            };
                             // Segun consigna tenemos que actualizar la fecha en cada Inicio de Sesion
                             loginNegocio.actualizarFechaLogin(legajo);
                             this.Hide();

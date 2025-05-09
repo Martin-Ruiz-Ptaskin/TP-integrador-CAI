@@ -34,6 +34,10 @@ namespace Negocio
         {
             return operacionesPersistencia.EliminarOperacionDesbloqueo(idOperacion);
         }
+        public Boolean EliminarOperacionModificacion(String idOperacion)
+        {
+            return operacionesPersistencia.EliminarOperacionModificacion(idOperacion);
+        }
         public Boolean AgregarOperacionModificacion(Persona persona)
         {
             return operacionesPersistencia.AgregarOperacionModificacion(persona);
