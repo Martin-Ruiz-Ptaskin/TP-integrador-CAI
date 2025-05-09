@@ -14,18 +14,30 @@ namespace Negocio
 
         public Boolean AgregarOperacionDesbloqueo(String legajo, String nuevaContrasena)
         {
-           return operacionesPersistencia.AgregarOperacionDesbloqueo(legajo, nuevaContrasena);
+            return operacionesPersistencia.AgregarOperacionDesbloqueo(legajo, nuevaContrasena);
         }
 
-        public List<OperacionesDesbloqueo> obtenerOperaciones()
+        public List<OperacionesDesbloqueo> obtenerOperacionesDesbloqueo()
         {
             List<OperacionesDesbloqueo> operacionesDesbloqueo = operacionesPersistencia.obtenerOperacionesDeDesbloqueo();
             return operacionesDesbloqueo;
         }
 
+        public List<OperacionesModificacion> obtenerOperacionesModificacion()
+        {
+            List<OperacionesModificacion> OperacionesModificacion = operacionesPersistencia.obtenerOperacionesDeModificacion();
+            return OperacionesModificacion;
+        }
+
+
         public Boolean EliminarOperacionPendiente(String idOperacion)
         {
             return operacionesPersistencia.EliminarOperacionDesbloqueo(idOperacion);
         }
+        public Boolean AgregarOperacionModificacion(Persona persona)
+        {
+            return operacionesPersistencia.AgregarOperacionModificacion(persona);
+        }
+
     }
 }

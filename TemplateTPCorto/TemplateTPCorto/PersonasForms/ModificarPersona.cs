@@ -14,8 +14,8 @@ namespace TemplateTPCorto
 {
     public partial class modificarPersona : Form
     {
-        new personaNegocio personaNegocio = new Negocio.personaNegocio();
-        new Persona personaAmodificar = new Persona();
+        personaNegocio personaNegocio = new Negocio.personaNegocio();
+        Persona personaAmodificar = new Persona();
         public modificarPersona(Persona persona)
         {
             InitializeComponent();
@@ -35,33 +35,35 @@ namespace TemplateTPCorto
         {
             try
             {
-                // Validar que el DNI tenga el formato correcto  
                 if (!EsDniValido(textDni.Text))
                 {
                     MessageBox.Show("El DNI ingresado no es válido. Debe ser un número de 7 u 8 dígitos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
-                // Obtener los nuevos valores de los campos de texto  
                 personaAmodificar.Nombre = textNombre.Text;
                 personaAmodificar.Apellido = textApellido.Text;
                 personaAmodificar.Dni = textDni.Text;
 
-                // Llamar al método de negocio para modificar la persona  
-                personaNegocio.modificarPersona(personaAmodificar);
+                var operacionRegistrada = personaNegocio.AgregarOperacionModificacion(personaAmodificar);
 
-                // Mostrar un mensaje de éxito  
-                MessageBox.Show("Persona modificada exitosamente.");
+                if (operacionRegistrada)
+                {
+                    MessageBox.Show("La operación de modificación ha sido registrada exitosamente. Esperando autorización del supervisor.");
+                }
+                else
+                {
+                    MessageBox.Show("Hubo un error al registrar la operación. Inténtelo nuevamente.");
+                }
 
-                // Cerrar el formulario  
                 this.Close();
             }
             catch (Exception ex)
             {
-                // Manejar excepciones y mostrar mensajes de error  
                 MessageBox.Show($"Error al modificar la persona: {ex.Message}");
             }
         }
+
         private bool EsDniValido(string dni)
         {
             // Verificar que el DNI sea un número, contenga solo dígitos y tenga 7 u 8 caracteres

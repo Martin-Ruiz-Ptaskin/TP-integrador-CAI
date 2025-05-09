@@ -67,5 +67,67 @@ namespace Persistencia
 
             return operacionesDesbloqueos;
         }
+        public List<OperacionesModificacion> obtenerOperacionesDeModificacion()
+        {
+            List<OperacionesModificacion> operaciones = new List<OperacionesModificacion>();
+            List<string> registros = dataBaseUtils.BuscarRegistro("operacion_cambio_persona.csv");
+
+            if (registros != null && registros.Count > 0)
+            {
+                registros.RemoveAt(0);
+
+                foreach (string linea in registros)
+                {
+                    try
+                    {
+                        OperacionesModificacion op = new OperacionesModificacion(linea);
+                        operaciones.Add(op);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Error al parsear operación: {ex.Message}");
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("No se encontraron registros en operacion_cambio_persona.csv.");
+            }
+
+            return operaciones;
+        }
+
+        public Boolean AgregarOperacionModificacion(Persona persona)
+        {
+            try
+            {
+                return dataBaseUtils.AgragarOperacionModificacion(
+                    persona.Legajo,
+                    persona.Nombre,
+                    persona.Apellido,
+                    persona.Dni,
+                    "operacion_cambio_persona.csv"
+                    );
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error en el método AgregarOperacionModificacion: {ex.Message}");
+                return false;
+            }
+        }
+
+        public Boolean EliminarOperacionModificacion(string idOperacion)
+        {
+            try
+            {
+                return dataBaseUtils.EliminarOperacionDesbloqueo(idOperacion, "operacion_cambio_persona.csv");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al eliminar la operación de modificación: {ex.Message}");
+            }
+            return false;
+        }
+
     }
 }

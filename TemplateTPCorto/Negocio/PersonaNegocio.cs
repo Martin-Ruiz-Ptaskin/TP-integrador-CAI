@@ -10,18 +10,24 @@ namespace Negocio
 {
     public class personaNegocio
     {
-        new PersonaPersistencia personaPersistencia = new PersonaPersistencia();
+        PersonaPersistencia personaPersistencia = new PersonaPersistencia();
+        OperacionesNegocio operacionesNegocio = new OperacionesNegocio();
+
         public void modificarPersona(Persona persona)
         {
             personaPersistencia.modificarPersona(persona);
-
+            operacionesNegocio.AgregarOperacionModificacion(persona);
         }
-    
-    public List<Persona> obtenerPersonas()
+
+        public List<Persona> obtenerPersonas()
         {
-            List<Persona> personas= personaPersistencia.obtenerPersonas();
+            List<Persona> personas = personaPersistencia.obtenerPersonas();
             return personas;
         }
-
-
-    } }
+        public Boolean AgregarOperacionModificacion(Persona persona)
+        {
+            OperacionesNegocio operacionesNegocio = new OperacionesNegocio();
+            return operacionesNegocio.AgregarOperacionModificacion(persona);
+        }
+    }
+}

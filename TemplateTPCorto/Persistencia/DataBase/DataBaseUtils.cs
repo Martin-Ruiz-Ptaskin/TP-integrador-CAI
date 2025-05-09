@@ -128,7 +128,7 @@ namespace Persistencia.DataBase
                 var datosUsuario = usuarioAModificar.Split(';');
                 datosUsuario[2] = nuevaContrasena; // Cambiar la contraseña
                 // Actualizar la fecha de último login, si es un desbloqueo, queda vacio
-                datosUsuario[4] = esDesbloqueo == true ? "" : DateTime.Now.ToString("d/M/yyyy"); 
+                datosUsuario[4] = esDesbloqueo == true ? "" : DateTime.Now.ToString("d/M/yyyy");
                 var usuarioActualizado = string.Join(";", datosUsuario);
                 registrosPorCargar.Add(usuarioActualizado);
                 File.WriteAllLines(rutaArchivo, registrosPorCargar);
@@ -136,7 +136,7 @@ namespace Persistencia.DataBase
                 return true;
             }
             catch (Exception e)
-            {;
+            {
                 Console.WriteLine($"Error al intentar modificar la contraseña: {e.Message}");
             }
             return false;
@@ -184,42 +184,42 @@ namespace Persistencia.DataBase
             return false;
         }
 
-    
 
 
-         public void ModificarRegistro(string nombreArchivo, string id, string nuevoRegistro)
-         {
-                // Construir la ruta completa sin modificar archivoCsv
-                string rutaArchivo = Path.Combine(archivoCsv, nombreArchivo);
-                try
+
+        public void ModificarRegistro(string nombreArchivo, string id, string nuevoRegistro)
+        {
+            // Construir la ruta completa sin modificar archivoCsv
+            string rutaArchivo = Path.Combine(archivoCsv, nombreArchivo);
+            try
+            {
+                // Verificar si el archivo existe
+                if (!File.Exists(rutaArchivo))
                 {
-                    // Verificar si el archivo existe
-                    if (!File.Exists(rutaArchivo))
-                    {
-                        Console.WriteLine("El archivo no existe: " + rutaArchivo);
-                        return;
-                    }
-                    // Leer el archivo y obtener las líneas
-                    List<string> listado = BuscarRegistro(nombreArchivo);
-                    // Filtrar las líneas que no coinciden con el ID a modificar (comparar solo la primera columna)
-                    var registrosRestantes = listado.Where(linea =>
-                    {
-                        var campos = linea.Split(';');
-                        return campos[0] != id; // Verifica solo el ID (primera columna)
-                    }).ToList();
-                    // Agregar el nuevo registro al final de la lista
-                    registrosRestantes.Add(nuevoRegistro);
-                    // Sobrescribir el archivo con las líneas restantes y el nuevo registro
-                    File.WriteAllLines(rutaArchivo, registrosRestantes);
-                    Console.WriteLine($"Registro con ID {id} modificado correctamente.");
+                    Console.WriteLine("El archivo no existe: " + rutaArchivo);
+                    return;
                 }
-                catch (Exception e)
+                // Leer el archivo y obtener las líneas
+                List<string> listado = BuscarRegistro(nombreArchivo);
+                // Filtrar las líneas que no coinciden con el ID a modificar (comparar solo la primera columna)
+                var registrosRestantes = listado.Where(linea =>
                 {
-                    Console.WriteLine("Error al intentar modificar el registro:");
-                    Console.WriteLine($"Mensaje: {e.Message}");
-                    Console.WriteLine($"Pila de errores: {e.StackTrace}");
-                }
-         }
+                    var campos = linea.Split(';');
+                    return campos[0] != id; // Verifica solo el ID (primera columna)
+                }).ToList();
+                // Agregar el nuevo registro al final de la lista
+                registrosRestantes.Add(nuevoRegistro);
+                // Sobrescribir el archivo con las líneas restantes y el nuevo registro
+                File.WriteAllLines(rutaArchivo, registrosRestantes);
+                Console.WriteLine($"Registro con ID {id} modificado correctamente.");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error al intentar modificar el registro:");
+                Console.WriteLine($"Mensaje: {e.Message}");
+                Console.WriteLine($"Pila de errores: {e.StackTrace}");
+            }
+        }
 
         public Boolean DesbloquearCredencial(string legajo, string nombreArchivoUsuariosBloqueados, string nombreArchivoIntentosLogin )
         {
@@ -245,7 +245,7 @@ namespace Persistencia.DataBase
                 return true;
             }
             catch (Exception e)
-            { 
+            {
                 Console.WriteLine($"Error al intentar desbloquear usuario: {e.Message}");
             }
             return false;
@@ -304,7 +304,7 @@ namespace Persistencia.DataBase
                     var campos = linea.Split(';');
                     return campos[0] != idOperacion;
                 }).ToList();
-               
+
                 File.WriteAllLines(rutaOperaciones, registrosPorCargar);
                 Console.WriteLine($"Operacion eliminada a persistencia");
                 return true;
@@ -314,6 +314,42 @@ namespace Persistencia.DataBase
                 ;
                 Console.WriteLine($"Error al eliminar la operacion: {e.Message}");
             }
+            return false;
+        }
+
+        public Boolean AgragarOperacionModificacion(string legajo, string nombre, string apellido, string dni, string archivoOperaciones)
+        {
+            try
+            {
+                string rutaOperaciones = Path.Combine(archivoCsv, archivoOperaciones);
+                Random random = new Random();
+
+                List<string> listadoOperaciones = BuscarRegistro(archivoOperaciones);
+                var registrosPorCargar = listadoOperaciones.Where(linea =>
+                {
+                    var campos = linea.Split(';');
+                    return campos[0] != legajo;
+                }).ToList();
+
+                string[] datosOperacion = new string[6];
+                datosOperacion[0] = random.Next(0, 100000000).ToString("D8");
+                datosOperacion[1] = legajo;
+                datosOperacion[2] = nombre;
+                datosOperacion[3] = apellido;
+                datosOperacion[4] = dni;
+                datosOperacion[5] = DateTime.Now.ToString("d/M/yyyy");
+
+                var operacionNueva = string.Join(";", datosOperacion);
+                registrosPorCargar.Add(operacionNueva);
+                File.WriteAllLines(rutaOperaciones, registrosPorCargar);
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Error al persistir la operacion: {e.Message}");
+            }
+
             return false;
         }
     }
