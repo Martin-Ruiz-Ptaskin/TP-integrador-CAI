@@ -1,6 +1,7 @@
 ﻿using Datos;
 using Negocio;
 using System;
+using Datos.modelos;
 
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -38,7 +39,7 @@ namespace TemplateTPCorto
         private void mostrarFuncionesSegunRol(string legajo)
         {
             roles = loginNegocio.obtenerRolesPorLegajo(legajo);
-
+            AppState.Roles = roles;
             foreach (string rol in roles) { 
             
                 if(rol == "1")

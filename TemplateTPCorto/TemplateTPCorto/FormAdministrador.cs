@@ -16,7 +16,9 @@ namespace TemplateTPCorto
     {
         AdministradorNegocio administradorNegocio = new AdministradorNegocio();
         OperacionesNegocio operacionesNegocio = new OperacionesNegocio();
-
+        personaNegocio personaNegocio = new personaNegocio();
+        Persona personaSeleccionada = new Persona();
+        String registroAeliminar = String.Empty;
         public FormAdministrador()
         {
             InitializeComponent();
@@ -27,13 +29,7 @@ namespace TemplateTPCorto
             OperacionesDesbloqueoListBox.DataSource = operacionesDeDesbloqueo;
             OperacionesDesbloqueoListBox.SelectedIndexChanged += OperacionesDesbloqueoListBox_SelectedIndexChanged;
 
-            List<OperacionesModificacion> operacionesModificacion = new List<OperacionesModificacion>();
-            operacionesModificacion = operacionesNegocio.obtenerOperacionesModificacion();
-            OperacionesModificacionPersonaListBox.SelectedIndexChanged -= OperacionesModificacionPersonaListBox_SelectedIndexChanged;
-            OperacionesModificacionPersonaListBox.DisplayMember = "DisplayInfo";
-            OperacionesModificacionPersonaListBox.DataSource = operacionesModificacion;
-            OperacionesModificacionPersonaListBox.SelectedIndexChanged += OperacionesModificacionPersonaListBox_SelectedIndexChanged;
-
+            obtenerOperacionesmodificacion();
         }
 
         private void OperacionesDesbloqueoListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -84,6 +80,7 @@ namespace TemplateTPCorto
         {
             OperacionesModificacion operacionSeleccionada = OperacionesModificacionPersonaListBox.SelectedItem as OperacionesModificacion;
             AprobarModificacionBtn.Enabled = true;
+            Console.WriteLine(operacionSeleccionada.ToString());
         }
 
         private void AprobarModificacionBtn_Click(object sender, EventArgs e)
@@ -131,5 +128,54 @@ namespace TemplateTPCorto
          }*/
         }
 
+       
+
+        private void AprobarModificacionBtn_Click_2(object sender, EventArgs e)
+        {
+            try {
+                personaNegocio.modificarPersonaPersitencia(personaSeleccionada, registroAeliminar);
+
+                obtenerOperacionesmodificacion();
+                MessageBox.Show($"La persona {personaSeleccionada.Nombre} {personaSeleccionada.Apellido} fue modificada con éxito", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            }
+            catch
+            {
+                MessageBox.Show("Error al modificar la persona, intente nuevamente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void OperacionesModificacionPersonaListBox_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            OperacionesModificacion operacionSeleccionada = OperacionesModificacionPersonaListBox.SelectedItem as OperacionesModificacion;
+            registroAeliminar=operacionSeleccionada.IdOperacion;
+            if (operacionSeleccionada != null)
+            {
+                // Crear la cadena en formato CSV
+                string datosPersona = $"{operacionSeleccionada.Legajo};{operacionSeleccionada.Nombre};{operacionSeleccionada.Apellido};{operacionSeleccionada.Dni};{operacionSeleccionada.FechaIngreso:dd/MM/yyyy}";
+
+
+                // Opcional: Mostrar información de la persona en consola o en la interfaz
+                Console.WriteLine($"Persona instanciada: {personaSeleccionada.Nombre} {personaSeleccionada.Apellido}, DNI: {personaSeleccionada.Dni}");
+                // Instanciar la persona usando el constructor que acepta una cadena CSV
+                personaSeleccionada = new Persona(datosPersona);
+
+            }
+            else
+            {
+                MessageBox.Show("Por favor, seleccione una operación válida.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+        }
+        public void obtenerOperacionesmodificacion()
+        {
+
+            List<OperacionesModificacion> operacionesModificacion = new List<OperacionesModificacion>();
+            operacionesModificacion = operacionesNegocio.obtenerOperacionesModificacion();
+            OperacionesModificacionPersonaListBox.SelectedIndexChanged -= OperacionesModificacionPersonaListBox_SelectedIndexChanged;
+            OperacionesModificacionPersonaListBox.DisplayMember = "DisplayInfo";
+            OperacionesModificacionPersonaListBox.DataSource = operacionesModificacion;
+            OperacionesModificacionPersonaListBox.SelectedIndexChanged += OperacionesModificacionPersonaListBox_SelectedIndexChanged;
+        }
     }
 }
