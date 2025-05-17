@@ -293,7 +293,7 @@ namespace Persistencia.DataBase
                 }).ToList();
                 string[] datosAutorizacion = new string[7];
                 datosAutorizacion[0] = datosOperacion[0];
-                datosAutorizacion[1] = "Desbloqueo";
+                datosAutorizacion[1] = "desbloqueoCredencial";
                 datosAutorizacion[2] = "Pendiente";
                 datosAutorizacion[3] = "Pendiente de agregar"; //Legajo usuario actual pendiente de agregar
                 datosAutorizacion[4] = DateTime.Now.ToString("d/M/yyyy");
@@ -326,21 +326,19 @@ namespace Persistencia.DataBase
                     return campos[0] != idOperacion;
                 }).ToList();
 
-                var autorizacionActual = listadoAutorizaciones.Where(linea =>
-                {
-                    var campos = linea.Split(';');
-                    return campos[0] == idOperacion;
-                }).ToList();
+                var autorizacionActual = listadoAutorizaciones.FirstOrDefault(linea => linea.Split(';')[0] == idOperacion);
+                var datosAutorizacionActual = autorizacionActual.Split(';');
 
-                string[] datosAutorizacion = new string[7];
-                datosAutorizacion[0] = idOperacion;
-                datosAutorizacion[1] = autorizacionActual[1];
-                datosAutorizacion[2] = "Aprobado";
-                datosAutorizacion[3] = autorizacionActual[3];
-                datosAutorizacion[4] = autorizacionActual[4];
-                datosAutorizacion[5] = " "; //Legajo usuario actual pendiente de agregar
-                datosAutorizacion[6] = DateTime.Now.ToString("d/M/yyyy");
-                var autorizacionNueva = string.Join(";", datosAutorizacion);
+                string[] datosAutorizacionNuevos = new string[7];
+
+                datosAutorizacionNuevos[0] = idOperacion;
+                datosAutorizacionNuevos[1] = datosAutorizacionActual[1];
+                datosAutorizacionNuevos[2] = "Aprobado";
+                datosAutorizacionNuevos[3] = datosAutorizacionActual[3];
+                datosAutorizacionNuevos[4] = datosAutorizacionActual[4];
+                datosAutorizacionNuevos[5] = " "; //Legajo usuario actual pendiente de agregar
+                datosAutorizacionNuevos[6] = DateTime.Now.ToString("d/M/yyyy");
+                var autorizacionNueva = string.Join(";", datosAutorizacionNuevos);
                 autorizacionesPorCargar.Add(autorizacionNueva);
                 File.WriteAllLines(rutaAutorizaciones, autorizacionesPorCargar);
                 Console.WriteLine($"Operacion aprobada en persistencia");
