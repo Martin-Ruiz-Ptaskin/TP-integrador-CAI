@@ -17,18 +17,29 @@ namespace Negocio
             return operacionesPersistencia.AgregarOperacionDesbloqueo(legajo, nuevaContrasena);
         }
 
-        public List<OperacionesDesbloqueo> obtenerOperacionesDesbloqueo()
+        public List<Autorizaciones> obtenerAutorizacionesDesbloqueo()
         {
-            List<OperacionesDesbloqueo> operacionesDesbloqueo = operacionesPersistencia.obtenerOperacionesDeDesbloqueo();
+            List<Autorizaciones> operacionesDesbloqueo = operacionesPersistencia.obtenerOperacionesDeDesbloqueo();
             return operacionesDesbloqueo;
         }
 
-        public List<OperacionesModificacion> obtenerOperacionesModificacion()
+        public OperacionesDesbloqueo obtenerOperacionesDeDesbloqueoActual(string idOperacion)
         {
-            List<OperacionesModificacion> OperacionesModificacion = operacionesPersistencia.obtenerOperacionesDeModificacion();
-            return OperacionesModificacion;
+            OperacionesDesbloqueo operacionesDesbloqueo = operacionesPersistencia.obtenerOperacionesDeDesbloqueoActual(idOperacion);
+            return operacionesDesbloqueo;
         }
 
+        public OperacionesModificacion obtenerOperacionesModificacionActual(string idOperacion)
+        {
+            OperacionesModificacion operacionesModificacion = operacionesPersistencia.obtenerOperacionesModificacionActual(idOperacion);
+            return operacionesModificacion;
+        }
+
+        public List<Autorizaciones> obtenerOperacionesModificacion()
+        {
+            List<Autorizaciones> autorizacionesModificacion = operacionesPersistencia.obtenerOperacionesDeModificacion();
+            return autorizacionesModificacion;
+        }
 
         public Boolean AprobarEstadoAutorizacion(String idOperacion)
         {

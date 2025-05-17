@@ -1,4 +1,5 @@
 ﻿using Datos;
+using Datos.modelos;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -283,7 +284,6 @@ namespace Persistencia.DataBase
                 File.WriteAllLines(rutaOperaciones, registrosPorCargar);
                 Console.WriteLine($"Operacion agregada a persistencia");
 
-                //idOperacion;tipoOperacion;estado;legajoSolicitante;fechaSolicitud;legajoAutorizador;fechaAutorizacion
                 string rutaAutorizaciones = Path.Combine(archivoCsv, "autorizacion.csv");
                 List<string> listadoAutorizaciones = BuscarRegistro("autorizacion.csv");
                 var autorizacionPorCargar = listadoAutorizaciones.Where(linea =>
@@ -295,7 +295,7 @@ namespace Persistencia.DataBase
                 datosAutorizacion[0] = datosOperacion[0];
                 datosAutorizacion[1] = "desbloqueoCredencial";
                 datosAutorizacion[2] = "Pendiente";
-                datosAutorizacion[3] = "Pendiente de agregar"; //Legajo usuario actual pendiente de agregar
+                datosAutorizacion[3] = AppState.UsuarioActual.Legajo.ToString();
                 datosAutorizacion[4] = DateTime.Now.ToString("d/M/yyyy");
                 datosAutorizacion[5] = " ";
                 datosAutorizacion[6] = " ";
@@ -336,7 +336,7 @@ namespace Persistencia.DataBase
                 datosAutorizacionNuevos[2] = "Aprobado";
                 datosAutorizacionNuevos[3] = datosAutorizacionActual[3];
                 datosAutorizacionNuevos[4] = datosAutorizacionActual[4];
-                datosAutorizacionNuevos[5] = " "; //Legajo usuario actual pendiente de agregar
+                datosAutorizacionNuevos[5] = AppState.UsuarioActual.Legajo.ToString();
                 datosAutorizacionNuevos[6] = DateTime.Now.ToString("d/M/yyyy");
                 var autorizacionNueva = string.Join(";", datosAutorizacionNuevos);
                 autorizacionesPorCargar.Add(autorizacionNueva);
@@ -389,7 +389,7 @@ namespace Persistencia.DataBase
                 datosAutorizacion[0] = datosOperacion[0];
                 datosAutorizacion[1] = "modificarPersona";
                 datosAutorizacion[2] = "Pendiente";
-                datosAutorizacion[3] = "Pendiente de agregar"; //Legajo usuario actual pendiente de agregar
+                datosAutorizacion[3] = AppState.UsuarioActual.Legajo.ToString();
                 datosAutorizacion[4] = DateTime.Now.ToString("d/M/yyyy");
                 datosAutorizacion[5] = " ";
                 datosAutorizacion[6] = " ";

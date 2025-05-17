@@ -38,21 +38,24 @@ namespace Persistencia
             return false;
         }
 
-        public List<OperacionesDesbloqueo> obtenerOperacionesDeDesbloqueo()
+        public List<Autorizaciones> obtenerOperacionesDeDesbloqueo()
         {
-            List<OperacionesDesbloqueo> operacionesDesbloqueos = new List<OperacionesDesbloqueo>();
-            List<String> listado = dataBaseUtils.BuscarRegistro("operacion_cambio_credencial.csv");
+            List<Autorizaciones> autorizaciones = new List<Autorizaciones>();
+            List<String> listado = dataBaseUtils.BuscarRegistro("autorizacion.csv");
 
             if (listado != null && listado.Count > 0)
             {
                 listado.RemoveAt(0);
 
-                foreach (String operacionActual in listado)
+                foreach (String autorizacionActual in listado)
                 {
                     try
                     {
-                        OperacionesDesbloqueo operacion = new OperacionesDesbloqueo(operacionActual);
-                        operacionesDesbloqueos.Add(operacion);
+                        Autorizaciones autorizacionAgregar = new Autorizaciones(autorizacionActual);
+                        if(autorizacionAgregar.estado == "Pendiente" && autorizacionAgregar.tipoOperacion == "desbloqueoCredencial")
+                        {
+                           autorizaciones.Add(autorizacionAgregar);
+                        }
                     }
                     catch (Exception ex)
                     {
@@ -65,12 +68,77 @@ namespace Persistencia
                 Console.WriteLine("No se encontraron registros en el archivo operacion_cambio_credencial.csv.");
             }
 
-            return operacionesDesbloqueos;
+            return autorizaciones;
         }
-        public List<OperacionesModificacion> obtenerOperacionesDeModificacion()
+
+        public OperacionesDesbloqueo obtenerOperacionesDeDesbloqueoActual(string idOperacion)
         {
-            List<OperacionesModificacion> operaciones = new List<OperacionesModificacion>();
-            List<string> registros = dataBaseUtils.BuscarRegistro("operacion_cambio_persona.csv");
+            List<String> listado = dataBaseUtils.BuscarRegistro("operacion_cambio_credencial.csv");
+
+            if (listado != null && listado.Count > 0)
+            {
+                listado.RemoveAt(0);
+
+                foreach (String operacionActual in listado)
+                {
+                    try
+                    {
+                        OperacionesDesbloqueo datosOperacionActual = new OperacionesDesbloqueo(operacionActual);
+                        if(datosOperacionActual.IdOperacion == idOperacion)
+                        {
+                            return datosOperacionActual;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Error al obtener las personas: {ex.Message}");
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("No se encontraron registros en el archivo operacion_cambio_credencial.csv.");
+            }
+
+            return null;
+        }
+
+        public OperacionesModificacion obtenerOperacionesModificacionActual(string idOperacion)
+        {
+            List<String> listado = dataBaseUtils.BuscarRegistro("operacion_cambio_persona.csv");
+
+            if (listado != null && listado.Count > 0)
+            {
+                listado.RemoveAt(0);
+
+                foreach (String operacionActual in listado)
+                {
+                    try
+                    {
+                        OperacionesModificacion datosOperacionActual = new OperacionesModificacion(operacionActual);
+                        if (datosOperacionActual.IdOperacion == idOperacion)
+                        {
+                            return datosOperacionActual;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Error al obtener las personas: {ex.Message}");
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("No se encontraron registros en el archivo operacion_cambio_credencial.csv.");
+            }
+
+            return null;
+        }
+
+        public List<Autorizaciones> obtenerOperacionesDeModificacion()
+        {
+            List<Autorizaciones> autorizaciones = new List<Autorizaciones>();
+            List<string> registros = dataBaseUtils.BuscarRegistro("autorizacion.csv");
 
             if (registros != null && registros.Count > 0)
             {
@@ -80,8 +148,12 @@ namespace Persistencia
                 {
                     try
                     {
-                        OperacionesModificacion op = new OperacionesModificacion(linea);
-                        operaciones.Add(op);
+                        Autorizaciones autorizacionAgregar = new Autorizaciones(linea);
+                        if (autorizacionAgregar.estado == "Pendiente" && autorizacionAgregar.tipoOperacion == "modificarPersona")
+                        {
+                            autorizaciones.Add(autorizacionAgregar);
+                        }
+
                     }
                     catch (Exception ex)
                     {
@@ -94,7 +166,7 @@ namespace Persistencia
                 Console.WriteLine("No se encontraron registros en operacion_cambio_persona.csv.");
             }
 
-            return operaciones;
+            return autorizaciones;
         }
 
         public Boolean AgregarOperacionModificacion(Persona persona)

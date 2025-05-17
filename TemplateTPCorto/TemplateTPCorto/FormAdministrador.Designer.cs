@@ -40,10 +40,10 @@
             // AprobarDesbloqueoBtn
             // 
             this.AprobarDesbloqueoBtn.Enabled = false;
-            this.AprobarDesbloqueoBtn.Location = new System.Drawing.Point(93, 282);
-            this.AprobarDesbloqueoBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.AprobarDesbloqueoBtn.Location = new System.Drawing.Point(70, 229);
+            this.AprobarDesbloqueoBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.AprobarDesbloqueoBtn.Name = "AprobarDesbloqueoBtn";
-            this.AprobarDesbloqueoBtn.Size = new System.Drawing.Size(164, 48);
+            this.AprobarDesbloqueoBtn.Size = new System.Drawing.Size(123, 39);
             this.AprobarDesbloqueoBtn.TabIndex = 0;
             this.AprobarDesbloqueoBtn.Text = "Aprobar Desbloqueo";
             this.AprobarDesbloqueoBtn.UseVisualStyleBackColor = true;
@@ -52,41 +52,40 @@
             // OperacionesDesbloqueoListBox
             // 
             this.OperacionesDesbloqueoListBox.FormattingEnabled = true;
-            this.OperacionesDesbloqueoListBox.ItemHeight = 16;
-            this.OperacionesDesbloqueoListBox.Location = new System.Drawing.Point(93, 71);
-            this.OperacionesDesbloqueoListBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.OperacionesDesbloqueoListBox.Location = new System.Drawing.Point(70, 58);
+            this.OperacionesDesbloqueoListBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.OperacionesDesbloqueoListBox.Name = "OperacionesDesbloqueoListBox";
-            this.OperacionesDesbloqueoListBox.Size = new System.Drawing.Size(239, 196);
+            this.OperacionesDesbloqueoListBox.Size = new System.Drawing.Size(350, 160);
             this.OperacionesDesbloqueoListBox.TabIndex = 5;
             this.OperacionesDesbloqueoListBox.SelectedIndexChanged += new System.EventHandler(this.OperacionesDesbloqueoListBox_SelectedIndexChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(95, 44);
+            this.label1.Location = new System.Drawing.Point(71, 36);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(180, 16);
+            this.label1.Size = new System.Drawing.Size(140, 13);
             this.label1.TabIndex = 6;
             this.label1.Text = "Operaciones de desbloqueo";
             // 
             // OperacionesModificacionPersonaListBox
             // 
             this.OperacionesModificacionPersonaListBox.FormattingEnabled = true;
-            this.OperacionesModificacionPersonaListBox.ItemHeight = 16;
-            this.OperacionesModificacionPersonaListBox.Location = new System.Drawing.Point(424, 71);
-            this.OperacionesModificacionPersonaListBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.OperacionesModificacionPersonaListBox.Location = new System.Drawing.Point(570, 58);
+            this.OperacionesModificacionPersonaListBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.OperacionesModificacionPersonaListBox.Name = "OperacionesModificacionPersonaListBox";
-            this.OperacionesModificacionPersonaListBox.Size = new System.Drawing.Size(239, 196);
+            this.OperacionesModificacionPersonaListBox.Size = new System.Drawing.Size(350, 160);
             this.OperacionesModificacionPersonaListBox.TabIndex = 8;
             this.OperacionesModificacionPersonaListBox.SelectedIndexChanged += new System.EventHandler(this.OperacionesModificacionPersonaListBox_SelectedIndexChanged_1);
             // 
             // AprobarModificacionBtn
             // 
             this.AprobarModificacionBtn.Enabled = false;
-            this.AprobarModificacionBtn.Location = new System.Drawing.Point(424, 282);
-            this.AprobarModificacionBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.AprobarModificacionBtn.Location = new System.Drawing.Point(570, 222);
+            this.AprobarModificacionBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.AprobarModificacionBtn.Name = "AprobarModificacionBtn";
-            this.AprobarModificacionBtn.Size = new System.Drawing.Size(164, 48);
+            this.AprobarModificacionBtn.Size = new System.Drawing.Size(123, 39);
             this.AprobarModificacionBtn.TabIndex = 7;
             this.AprobarModificacionBtn.Text = "Aprobar Modificacion";
             this.AprobarModificacionBtn.UseVisualStyleBackColor = true;
@@ -95,24 +94,25 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(420, 53);
+            this.label2.Location = new System.Drawing.Point(567, 36);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(255, 16);
+            this.label2.Size = new System.Drawing.Size(200, 13);
             this.label2.TabIndex = 9;
             this.label2.Text = "Operaciones de modificación de persona";
             // 
             // FormAdministrador
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1018, 468);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.OperacionesModificacionPersonaListBox);
             this.Controls.Add(this.AprobarModificacionBtn);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.OperacionesDesbloqueoListBox);
             this.Controls.Add(this.AprobarDesbloqueoBtn);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "FormAdministrador";
             this.Text = "FormAdministrador";
             this.ResumeLayout(false);
