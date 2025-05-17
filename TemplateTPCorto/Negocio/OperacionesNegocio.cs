@@ -17,27 +17,35 @@ namespace Negocio
             return operacionesPersistencia.AgregarOperacionDesbloqueo(legajo, nuevaContrasena);
         }
 
-        public List<OperacionesDesbloqueo> obtenerOperacionesDesbloqueo()
+        public List<Autorizaciones> obtenerAutorizacionesDesbloqueo()
         {
-            List<OperacionesDesbloqueo> operacionesDesbloqueo = operacionesPersistencia.obtenerOperacionesDeDesbloqueo();
+            List<Autorizaciones> operacionesDesbloqueo = operacionesPersistencia.obtenerOperacionesDeDesbloqueo();
             return operacionesDesbloqueo;
         }
 
-        public List<OperacionesModificacion> obtenerOperacionesModificacion()
+        public OperacionesDesbloqueo obtenerOperacionesDeDesbloqueoActual(string idOperacion)
         {
-            List<OperacionesModificacion> OperacionesModificacion = operacionesPersistencia.obtenerOperacionesDeModificacion();
-            return OperacionesModificacion;
+            OperacionesDesbloqueo operacionesDesbloqueo = operacionesPersistencia.obtenerOperacionesDeDesbloqueoActual(idOperacion);
+            return operacionesDesbloqueo;
         }
 
+        public OperacionesModificacion obtenerOperacionesModificacionActual(string idOperacion)
+        {
+            OperacionesModificacion operacionesModificacion = operacionesPersistencia.obtenerOperacionesModificacionActual(idOperacion);
+            return operacionesModificacion;
+        }
 
-        public Boolean EliminarOperacionPendiente(String idOperacion)
+        public List<Autorizaciones> obtenerOperacionesModificacion()
         {
-            return operacionesPersistencia.EliminarOperacionDesbloqueo(idOperacion);
+            List<Autorizaciones> autorizacionesModificacion = operacionesPersistencia.obtenerOperacionesDeModificacion();
+            return autorizacionesModificacion;
         }
-        public Boolean EliminarOperacionModificacion(String idOperacion)
+
+        public Boolean AprobarEstadoAutorizacion(String idOperacion)
         {
-            return operacionesPersistencia.EliminarOperacionModificacion(idOperacion);
+            return operacionesPersistencia.AprobarEstadoAutorizacion(idOperacion);
         }
+
         public Boolean AgregarOperacionModificacion(Persona persona)
         {
             return operacionesPersistencia.AgregarOperacionModificacion(persona);

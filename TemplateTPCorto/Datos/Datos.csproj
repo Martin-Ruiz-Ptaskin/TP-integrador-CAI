@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Login\Credencial.cs" />
     <Compile Include="modelos\AppState.cs" />
+    <Compile Include="modelos\Autorizaciones.cs" />
     <Compile Include="modelos\OperacionesDesbloqueo.cs" />
     <Compile Include="modelos\OperacionesModificacion.cs" />
     <Compile Include="modelos\Persona.cs" />

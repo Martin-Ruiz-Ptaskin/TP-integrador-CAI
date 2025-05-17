@@ -1,4 +1,5 @@
 ﻿using Datos;
+using Datos.modelos;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -282,6 +283,26 @@ namespace Persistencia.DataBase
                 registrosPorCargar.Add(operacionNueva);
                 File.WriteAllLines(rutaOperaciones, registrosPorCargar);
                 Console.WriteLine($"Operacion agregada a persistencia");
+
+                string rutaAutorizaciones = Path.Combine(archivoCsv, "autorizacion.csv");
+                List<string> listadoAutorizaciones = BuscarRegistro("autorizacion.csv");
+                var autorizacionPorCargar = listadoAutorizaciones.Where(linea =>
+                {
+                    var campos = linea.Split(';');
+                    return campos[0] != datosOperacion[0];
+                }).ToList();
+                string[] datosAutorizacion = new string[7];
+                datosAutorizacion[0] = datosOperacion[0];
+                datosAutorizacion[1] = "desbloqueoCredencial";
+                datosAutorizacion[2] = "Pendiente";
+                datosAutorizacion[3] = AppState.UsuarioActual.Legajo.ToString();
+                datosAutorizacion[4] = DateTime.Now.ToString("d/M/yyyy");
+                datosAutorizacion[5] = " ";
+                datosAutorizacion[6] = " ";
+                var autorizacionNueva = string.Join(";", datosAutorizacion);
+                autorizacionPorCargar.Add(autorizacionNueva);
+                File.WriteAllLines(rutaAutorizaciones, autorizacionPorCargar);
+                Console.WriteLine($"Autorizacion agregada a persistencia");
                 return true;
             }
             catch (Exception e)
@@ -293,20 +314,34 @@ namespace Persistencia.DataBase
         }
 
 
-        public Boolean EliminarOperacionDesbloqueo(string idOperacion, string archivoOperaciones)
+        public Boolean AprobarEstadoAutorizacion(string idOperacion, string archivoAutorizaciones)
         {
-            string rutaOperaciones = Path.Combine(archivoCsv, archivoOperaciones);
+            string rutaAutorizaciones = Path.Combine(archivoCsv, archivoAutorizaciones);
             try
             {
-                List<string> listadoOperaciones = BuscarRegistro(archivoOperaciones);
-                var registrosPorCargar = listadoOperaciones.Where(linea =>
+                List<string> listadoAutorizaciones = BuscarRegistro(archivoAutorizaciones);
+                var autorizacionesPorCargar = listadoAutorizaciones.Where(linea =>
                 {
                     var campos = linea.Split(';');
                     return campos[0] != idOperacion;
                 }).ToList();
 
-                File.WriteAllLines(rutaOperaciones, registrosPorCargar);
-                Console.WriteLine($"Operacion eliminada a persistencia");
+                var autorizacionActual = listadoAutorizaciones.FirstOrDefault(linea => linea.Split(';')[0] == idOperacion);
+                var datosAutorizacionActual = autorizacionActual.Split(';');
+
+                string[] datosAutorizacionNuevos = new string[7];
+
+                datosAutorizacionNuevos[0] = idOperacion;
+                datosAutorizacionNuevos[1] = datosAutorizacionActual[1];
+                datosAutorizacionNuevos[2] = "Aprobado";
+                datosAutorizacionNuevos[3] = datosAutorizacionActual[3];
+                datosAutorizacionNuevos[4] = datosAutorizacionActual[4];
+                datosAutorizacionNuevos[5] = AppState.UsuarioActual.Legajo.ToString();
+                datosAutorizacionNuevos[6] = DateTime.Now.ToString("d/M/yyyy");
+                var autorizacionNueva = string.Join(";", datosAutorizacionNuevos);
+                autorizacionesPorCargar.Add(autorizacionNueva);
+                File.WriteAllLines(rutaAutorizaciones, autorizacionesPorCargar);
+                Console.WriteLine($"Operacion aprobada en persistencia");
                 return true;
             }
             catch (Exception e)
@@ -342,6 +377,26 @@ namespace Persistencia.DataBase
                 var operacionNueva = string.Join(";", datosOperacion);
                 registrosPorCargar.Add(operacionNueva);
                 File.WriteAllLines(rutaOperaciones, registrosPorCargar);
+
+                string rutaAutorizaciones = Path.Combine(archivoCsv, "autorizacion.csv");
+                List<string> listadoAutorizaciones = BuscarRegistro("autorizacion.csv");
+                var autorizacionPorCargar = listadoAutorizaciones.Where(linea =>
+                {
+                    var campos = linea.Split(';');
+                    return campos[0] != datosOperacion[0];
+                }).ToList();
+                string[] datosAutorizacion = new string[7];
+                datosAutorizacion[0] = datosOperacion[0];
+                datosAutorizacion[1] = "modificarPersona";
+                datosAutorizacion[2] = "Pendiente";
+                datosAutorizacion[3] = AppState.UsuarioActual.Legajo.ToString();
+                datosAutorizacion[4] = DateTime.Now.ToString("d/M/yyyy");
+                datosAutorizacion[5] = " ";
+                datosAutorizacion[6] = " ";
+                var autorizacionNueva = string.Join(";", datosAutorizacion);
+                autorizacionPorCargar.Add(autorizacionNueva);
+                File.WriteAllLines(rutaAutorizaciones, autorizacionPorCargar);
+                Console.WriteLine($"Autorizacion agregada a persistencia");
 
                 return true;
             }

@@ -33,7 +33,7 @@ namespace Negocio
                 personaPersistencia.modificarPersona(persona);
 
                 // Si la primera función se ejecuta correctamente, ejecutar la segunda
-                operacionesNegocio.EliminarOperacionModificacion(registroAeliminar);
+                operacionesNegocio.AprobarEstadoAutorizacion(registroAeliminar);
             }
             catch (Exception ex)
             {

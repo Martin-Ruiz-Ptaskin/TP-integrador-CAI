@@ -22,8 +22,8 @@ namespace TemplateTPCorto
         public FormAdministrador()
         {
             InitializeComponent();
-            List<Datos.OperacionesDesbloqueo> operacionesDeDesbloqueo = new List<Datos.OperacionesDesbloqueo>();
-            operacionesDeDesbloqueo = operacionesNegocio.obtenerOperacionesDesbloqueo();
+            List<Datos.Autorizaciones> operacionesDeDesbloqueo = new List<Datos.Autorizaciones>();
+            operacionesDeDesbloqueo = operacionesNegocio.obtenerAutorizacionesDesbloqueo();
             OperacionesDesbloqueoListBox.SelectedIndexChanged -= OperacionesDesbloqueoListBox_SelectedIndexChanged;
             OperacionesDesbloqueoListBox.DisplayMember = "DisplayInfo";
             OperacionesDesbloqueoListBox.DataSource = operacionesDeDesbloqueo;
@@ -34,21 +34,23 @@ namespace TemplateTPCorto
 
         private void OperacionesDesbloqueoListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            OperacionesDesbloqueo operacionSeleccionada = OperacionesDesbloqueoListBox.SelectedItem as OperacionesDesbloqueo;
+            Autorizaciones operacionSeleccionada = OperacionesDesbloqueoListBox.SelectedItem as Autorizaciones;
             AprobarDesbloqueoBtn.Enabled = true;
         }
 
         private void AprobarDesbloqueoBtn_Click(object sender, EventArgs e)
         {
             CambioContrasenaNegocio cambioContrasenaNegocio = new CambioContrasenaNegocio();
-            OperacionesDesbloqueo operacionSeleccionada = OperacionesDesbloqueoListBox.SelectedItem as OperacionesDesbloqueo;
+            Autorizaciones autorizacionSeleccionada = OperacionesDesbloqueoListBox.SelectedItem as Autorizaciones;
+            OperacionesDesbloqueo operacionSeleccionada = operacionesNegocio.obtenerOperacionesDeDesbloqueoActual(autorizacionSeleccionada.idOperacion);
             bool cambioExitoso = cambioContrasenaNegocio.CambioContrasena(operacionSeleccionada.Legajo, operacionSeleccionada.Contrasena, true);
             if (cambioExitoso)
             {
                 bool desbloqueoExitoso = cambioContrasenaNegocio.DesbloquearCredencial(operacionSeleccionada.Legajo);
                 if (desbloqueoExitoso)
                 {
-                    bool operacionEliminada = operacionesNegocio.EliminarOperacionPendiente(operacionSeleccionada.IdOperacion);
+                    
+                    bool operacionEliminada = operacionesNegocio.AprobarEstadoAutorizacion(operacionSeleccionada.IdOperacion);
                     if (operacionEliminada)
                     {
                         MessageBox.Show($"El usuario: {operacionSeleccionada.Legajo} - {operacionSeleccionada.NombreUsuario}, fue desbloqueado", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -68,8 +70,8 @@ namespace TemplateTPCorto
             {
                 MessageBox.Show("Error al desbloquear el usuario, intente nuevamente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            List<Datos.OperacionesDesbloqueo> operacionesDeDesbloqueo = new List<Datos.OperacionesDesbloqueo>();
-            operacionesDeDesbloqueo = operacionesNegocio.obtenerOperacionesDesbloqueo();
+            List<Datos.Autorizaciones> operacionesDeDesbloqueo = new List<Datos.Autorizaciones>();
+            operacionesDeDesbloqueo = operacionesNegocio.obtenerAutorizacionesDesbloqueo();
             OperacionesDesbloqueoListBox.SelectedIndexChanged -= OperacionesDesbloqueoListBox_SelectedIndexChanged;
             OperacionesDesbloqueoListBox.DisplayMember = "DisplayInfo";
             OperacionesDesbloqueoListBox.DataSource = operacionesDeDesbloqueo;
@@ -80,55 +82,7 @@ namespace TemplateTPCorto
         {
             OperacionesModificacion operacionSeleccionada = OperacionesModificacionPersonaListBox.SelectedItem as OperacionesModificacion;
             AprobarModificacionBtn.Enabled = true;
-            Console.WriteLine(operacionSeleccionada.ToString());
         }
-
-        private void AprobarModificacionBtn_Click(object sender, EventArgs e)
-        {
-            /* OperacionesModificacion operacionSeleccionada = OperacionesModificacionPersonaListBox.SelectedItem as OperacionesModificacion;
-             if (operacionSeleccionada != null)
-             {
-                 Persona personaModificada = new Persona
-                 {
-                     Legajo = operacionSeleccionada.Legajo,
-                     Nombre = operacionSeleccionada.Nombre,
-                     Apellido = operacionSeleccionada.Apellido,
-                     Dni = operacionSeleccionada.Dni
-                 };
-
-                 PersonaPersistencia personaPersistencia = new PersonaPersistencia();
-                 try
-                 {
-                     personaPersistencia.modificarPersona(personaModificada);
-
-                     bool operacionEliminada = operacionesNegocio.EliminarOperacionModificacion(operacionSeleccionada.IdOperacion);
-                     if (operacionEliminada)
-                     {
-                         MessageBox.Show($"La persona {operacionSeleccionada.Nombre} {operacionSeleccionada.Apellido} fue modificada con éxito", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                     }
-                     else
-                     {
-                         MessageBox.Show("Error al procesar la modificación, intente nuevamente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                     }
-
-                     List<OperacionesModificacion> operacionesModificacion = operacionesNegocio.obtenerOperacionesModificacion();
-                     OperacionesModificacionPersonaListBox.SelectedIndexChanged -= OperacionesModificacionPersonaListBox_SelectedIndexChanged;
-                     OperacionesModificacionPersonaListBox.DataSource = operacionesModificacion;
-                     OperacionesModificacionPersonaListBox.SelectedIndexChanged += OperacionesModificacionPersonaListBox_SelectedIndexChanged;
-                 }
-                 catch (Exception ex)
-                 {
-                     MessageBox.Show($"Error al modificar la persona: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                 }
-             }
-             else
-             {
-                 MessageBox.Show("Por favor, seleccione una operación de modificación.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-             }
-         }*/
-        }
-
-       
 
         private void AprobarModificacionBtn_Click_2(object sender, EventArgs e)
         {
@@ -147,8 +101,9 @@ namespace TemplateTPCorto
 
         private void OperacionesModificacionPersonaListBox_SelectedIndexChanged_1(object sender, EventArgs e)
         {
-            OperacionesModificacion operacionSeleccionada = OperacionesModificacionPersonaListBox.SelectedItem as OperacionesModificacion;
-            registroAeliminar=operacionSeleccionada.IdOperacion;
+            Autorizaciones autorizacionSeleccionada = OperacionesModificacionPersonaListBox.SelectedItem as Autorizaciones;
+            OperacionesModificacion operacionSeleccionada = operacionesNegocio.obtenerOperacionesModificacionActual(autorizacionSeleccionada.idOperacion);
+            registroAeliminar =operacionSeleccionada.IdOperacion;
             if (operacionSeleccionada != null)
             {
                 // Crear la cadena en formato CSV
@@ -169,8 +124,7 @@ namespace TemplateTPCorto
         }
         public void obtenerOperacionesmodificacion()
         {
-
-            List<OperacionesModificacion> operacionesModificacion = new List<OperacionesModificacion>();
+            List<Autorizaciones> operacionesModificacion = new List<Autorizaciones>();
             operacionesModificacion = operacionesNegocio.obtenerOperacionesModificacion();
             OperacionesModificacionPersonaListBox.SelectedIndexChanged -= OperacionesModificacionPersonaListBox_SelectedIndexChanged;
             OperacionesModificacionPersonaListBox.DisplayMember = "DisplayInfo";
