@@ -30,14 +30,11 @@ namespace Negocio
         }
 
 
-        public Boolean EliminarOperacionPendiente(String idOperacion)
+        public Boolean AprobarEstadoAutorizacion(String idOperacion)
         {
-            return operacionesPersistencia.EliminarOperacionDesbloqueo(idOperacion);
+            return operacionesPersistencia.AprobarEstadoAutorizacion(idOperacion);
         }
-        public Boolean EliminarOperacionModificacion(String idOperacion)
-        {
-            return operacionesPersistencia.EliminarOperacionModificacion(idOperacion);
-        }
+
         public Boolean AgregarOperacionModificacion(Persona persona)
         {
             return operacionesPersistencia.AgregarOperacionModificacion(persona);

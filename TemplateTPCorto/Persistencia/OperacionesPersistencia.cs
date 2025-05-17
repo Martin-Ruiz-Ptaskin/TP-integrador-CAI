@@ -25,11 +25,11 @@ namespace Persistencia
             return false;
         }
 
-        public Boolean EliminarOperacionDesbloqueo(String idOperacion)
+        public Boolean AprobarEstadoAutorizacion(String idOperacion)
         {
             try
             {
-                return dataBaseUtils.EliminarOperacionDesbloqueo(idOperacion, "operacion_cambio_credencial.csv");
+                return dataBaseUtils.AprobarEstadoAutorizacion(idOperacion, "autorizacion.csv");
             }
             catch (Exception ex)
             {
@@ -115,19 +115,5 @@ namespace Persistencia
                 return false;
             }
         }
-
-        public Boolean EliminarOperacionModificacion(string idOperacion)
-        {
-            try
-            {
-                return dataBaseUtils.EliminarOperacionDesbloqueo(idOperacion, "operacion_cambio_persona.csv");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error al eliminar la operación de modificación: {ex.Message}");
-            }
-            return false;
-        }
-
     }
 }

@@ -48,7 +48,8 @@ namespace TemplateTPCorto
                 bool desbloqueoExitoso = cambioContrasenaNegocio.DesbloquearCredencial(operacionSeleccionada.Legajo);
                 if (desbloqueoExitoso)
                 {
-                    bool operacionEliminada = operacionesNegocio.EliminarOperacionPendiente(operacionSeleccionada.IdOperacion);
+                    
+                    bool operacionEliminada = operacionesNegocio.AprobarEstadoAutorizacion(operacionSeleccionada.IdOperacion);
                     if (operacionEliminada)
                     {
                         MessageBox.Show($"El usuario: {operacionSeleccionada.Legajo} - {operacionSeleccionada.NombreUsuario}, fue desbloqueado", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
