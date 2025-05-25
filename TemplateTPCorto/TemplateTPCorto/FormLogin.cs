@@ -19,7 +19,7 @@ namespace TemplateTPCorto
         public FormLogin()
         {
             InitializeComponent();
-            txtUsuario.Text = "craig.haynes";
+            txtUsuario.Text = "taylor.reynolds";
             txtPassword.Text = "12345678";
         }
 

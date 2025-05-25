@@ -58,6 +58,12 @@
     <Compile Include="FormDesbloquearCredencial.Designer.cs">
       <DependentUpon>FormDesbloquearCredencial.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormVentas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormVentas.Designer.cs">
+      <DependentUpon>FormVentas.cs</DependentUpon>
+    </Compile>
     <Compile Include="PersonasForms\ListaPersonas.cs">
       <SubType>Form</SubType>
     </Compile>

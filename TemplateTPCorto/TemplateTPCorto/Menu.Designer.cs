@@ -44,7 +44,7 @@
             // btnModificarPersona
             // 
             this.btnModificarPersona.Location = new System.Drawing.Point(0, 11);
-            this.btnModificarPersona.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnModificarPersona.Margin = new System.Windows.Forms.Padding(4);
             this.btnModificarPersona.Name = "btnModificarPersona";
             this.btnModificarPersona.Size = new System.Drawing.Size(649, 49);
             this.btnModificarPersona.TabIndex = 0;
@@ -55,7 +55,7 @@
             // btnDesbloquearCredencial
             // 
             this.btnDesbloquearCredencial.Location = new System.Drawing.Point(0, 68);
-            this.btnDesbloquearCredencial.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnDesbloquearCredencial.Margin = new System.Windows.Forms.Padding(4);
             this.btnDesbloquearCredencial.Name = "btnDesbloquearCredencial";
             this.btnDesbloquearCredencial.Size = new System.Drawing.Size(649, 49);
             this.btnDesbloquearCredencial.TabIndex = 1;
@@ -66,7 +66,7 @@
             // btnAutorizaciones
             // 
             this.btnAutorizaciones.Location = new System.Drawing.Point(0, 0);
-            this.btnAutorizaciones.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnAutorizaciones.Margin = new System.Windows.Forms.Padding(4);
             this.btnAutorizaciones.Name = "btnAutorizaciones";
             this.btnAutorizaciones.Size = new System.Drawing.Size(649, 49);
             this.btnAutorizaciones.TabIndex = 2;
@@ -77,11 +77,11 @@
             // btnOperador
             // 
             this.btnOperador.Location = new System.Drawing.Point(0, 1);
-            this.btnOperador.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnOperador.Margin = new System.Windows.Forms.Padding(4);
             this.btnOperador.Name = "btnOperador";
             this.btnOperador.Size = new System.Drawing.Size(649, 49);
             this.btnOperador.TabIndex = 3;
-            this.btnOperador.Text = "Ir a fase 2";
+            this.btnOperador.Text = "Seccion Ventas";
             this.btnOperador.UseVisualStyleBackColor = true;
             this.btnOperador.Click += new System.EventHandler(this.btnOperador_Click);
             // 
@@ -90,9 +90,9 @@
             this.gbSupervisor.Controls.Add(this.btnModificarPersona);
             this.gbSupervisor.Controls.Add(this.btnDesbloquearCredencial);
             this.gbSupervisor.Location = new System.Drawing.Point(169, 89);
-            this.gbSupervisor.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gbSupervisor.Margin = new System.Windows.Forms.Padding(4);
             this.gbSupervisor.Name = "gbSupervisor";
-            this.gbSupervisor.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gbSupervisor.Padding = new System.Windows.Forms.Padding(4);
             this.gbSupervisor.Size = new System.Drawing.Size(649, 118);
             this.gbSupervisor.TabIndex = 4;
             this.gbSupervisor.TabStop = false;
@@ -101,9 +101,9 @@
             // 
             this.gbAdministrador.Controls.Add(this.btnAutorizaciones);
             this.gbAdministrador.Location = new System.Drawing.Point(169, 225);
-            this.gbAdministrador.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gbAdministrador.Margin = new System.Windows.Forms.Padding(4);
             this.gbAdministrador.Name = "gbAdministrador";
-            this.gbAdministrador.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gbAdministrador.Padding = new System.Windows.Forms.Padding(4);
             this.gbAdministrador.Size = new System.Drawing.Size(649, 54);
             this.gbAdministrador.TabIndex = 5;
             this.gbAdministrador.TabStop = false;
@@ -112,9 +112,9 @@
             // 
             this.gbOperador.Controls.Add(this.btnOperador);
             this.gbOperador.Location = new System.Drawing.Point(169, 304);
-            this.gbOperador.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gbOperador.Margin = new System.Windows.Forms.Padding(4);
             this.gbOperador.Name = "gbOperador";
-            this.gbOperador.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gbOperador.Padding = new System.Windows.Forms.Padding(4);
             this.gbOperador.Size = new System.Drawing.Size(649, 50);
             this.gbOperador.TabIndex = 6;
             this.gbOperador.TabStop = false;
@@ -122,7 +122,7 @@
             // btnCambiarContrasena
             // 
             this.btnCambiarContrasena.Location = new System.Drawing.Point(169, 377);
-            this.btnCambiarContrasena.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnCambiarContrasena.Margin = new System.Windows.Forms.Padding(4);
             this.btnCambiarContrasena.Name = "btnCambiarContrasena";
             this.btnCambiarContrasena.Size = new System.Drawing.Size(649, 49);
             this.btnCambiarContrasena.TabIndex = 7;
@@ -139,7 +139,7 @@
             this.Controls.Add(this.gbOperador);
             this.Controls.Add(this.gbAdministrador);
             this.Controls.Add(this.gbSupervisor);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Menu";
             this.Text = "Menu";
             this.gbSupervisor.ResumeLayout(false);

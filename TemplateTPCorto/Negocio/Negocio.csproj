@@ -46,7 +46,9 @@
     <Compile Include="LoginNegocio.cs" />
     <Compile Include="CambioContrasenaNegocio.cs" />
     <Compile Include="PersonaNegocio.cs" />
+    <Compile Include="ProductoNegocio.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VentasNegocio.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Datos\Datos.csproj">
