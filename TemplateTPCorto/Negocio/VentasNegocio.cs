@@ -51,7 +51,7 @@ namespace Negocio
             List<Producto> productosConStock = new List<Producto>();
             foreach (Producto producto in productos)
             {
-                if (producto.Stock > 0)
+                if (producto.Stock > 0 && producto.FechaBaja == null)
                 {
                     productosConStock.Add(producto);
                 }

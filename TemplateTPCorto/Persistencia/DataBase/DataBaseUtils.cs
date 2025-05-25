@@ -461,6 +461,58 @@ namespace Persistencia.DataBase
 
             return false;
         }
+
+        public bool QuitarProductoCarrito(ProductoEnCarrito producto)
+        {
+            try
+            {
+                string rutaCarrito = Path.Combine(archivoCsv, "carrito.csv");
+
+                List<string> listadoCarrito = BuscarRegistro("carrito.csv");
+
+                var nuevoListado = listadoCarrito.Where(linea =>
+                {
+                    var campos = linea.Split(';');
+                    return campos[0] != producto.Id.ToString();
+                }).ToList();
+
+                File.WriteAllLines(rutaCarrito, nuevoListado);
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Error al quitar producto del carrito: {e.Message}");
+            }
+
+            return false;
+        }
+        public void limpiarCarrito()
+        {
+        
+            try
+            {
+                string rutaCarrito = Path.Combine(archivoCsv, "carrito.csv");
+
+                List<string> listadoCarrito = BuscarRegistro("carrito.csv");
+
+                var nuevoListado = listadoCarrito.Where(linea =>
+                {
+                    var campos = linea.Split(';');
+                    return campos[0] == "Id";
+                }).ToList();
+
+                File.WriteAllLines(rutaCarrito, nuevoListado);
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Error al limpiar carrito: {e.Message}");
+            }
+
+        }
+
+
     }
 }
 

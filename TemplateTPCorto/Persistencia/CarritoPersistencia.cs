@@ -24,6 +24,21 @@ namespace Persistencia
             }
             return false;
         }
+
+        public Boolean QuitarProductoCarrito(ProductoEnCarrito productoSeleccionado)
+        {
+            try
+            {
+                return dataBaseUtils.QuitarProductoCarrito(productoSeleccionado);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error en el método Quitar Producto del Carrito: {ex.Message}");
+            }
+            return false;
+        }
+
+
         public List<ProductoEnCarrito> obtenerProductosDelCarrito()
         {
             List<ProductoEnCarrito> productos = new List<ProductoEnCarrito>();
@@ -52,6 +67,18 @@ namespace Persistencia
             }
 
             return productos;
+        }
+        public void limpiarCarrito()
+        {
+            try
+            {
+                dataBaseUtils.limpiarCarrito();
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error en el método Limpiar carrito: {ex.Message}");
+            }
         }
     }
 }
