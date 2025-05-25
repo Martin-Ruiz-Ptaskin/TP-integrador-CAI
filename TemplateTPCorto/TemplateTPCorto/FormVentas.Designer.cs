@@ -80,6 +80,7 @@
             this.cboCategoriaProductos.Name = "cboCategoriaProductos";
             this.cboCategoriaProductos.Size = new System.Drawing.Size(121, 24);
             this.cboCategoriaProductos.TabIndex = 3;
+            this.cboCategoriaProductos.SelectedIndexChanged += new System.EventHandler(this.cboCategoriaProductos_SelectedIndexChanged);
             // 
             // lstProducto
             // 
@@ -89,6 +90,7 @@
             this.lstProducto.Name = "lstProducto";
             this.lstProducto.Size = new System.Drawing.Size(451, 260);
             this.lstProducto.TabIndex = 4;
+            this.lstProducto.SelectedIndexChanged += new System.EventHandler(this.lstProducto_SelectedIndexChanged);
             // 
             // listBox1
             // 
@@ -187,6 +189,7 @@
             // 
             // btnListarProductos
             // 
+            this.btnListarProductos.Enabled = false;
             this.btnListarProductos.Location = new System.Drawing.Point(349, 101);
             this.btnListarProductos.Name = "btnListarProductos";
             this.btnListarProductos.Size = new System.Drawing.Size(113, 23);

@@ -42,6 +42,22 @@ namespace Negocio
 
             return categoriaProductos;
         }
+        
+        public List<Producto> obtenerProductosPorCategoria(string idCategoria)
+        {
+            List<Producto> productos = new List<Producto>();
+            ProductoPersistencia productoPersistencia = new ProductoPersistencia();
+            productos = productoPersistencia.obtenerProductosPorCategoria(idCategoria);
+            List<Producto> productosConStock = new List<Producto>();
+            foreach (Producto producto in productos)
+            {
+                if (producto.Stock > 0)
+                {
+                    productosConStock.Add(producto);
+                }
+            }
+            return productosConStock;
+        }
 
     }
 }
