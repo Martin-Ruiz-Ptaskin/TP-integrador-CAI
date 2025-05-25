@@ -14,7 +14,7 @@ namespace TemplateTPCorto.PersonasForms
 {
     public partial class ListaPersonas : Form
     {
-        new personaNegocio personaNegocio = new Negocio.personaNegocio();
+        personaNegocio personaNegocio = new Negocio.personaNegocio();
         public ListaPersonas()
         {
             InitializeComponent();

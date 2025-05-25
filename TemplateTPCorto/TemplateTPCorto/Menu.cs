@@ -78,7 +78,8 @@ namespace TemplateTPCorto
 
         private void btnOperador_Click(object sender, EventArgs e)
         {
-
+            FormVentas formVentas = new FormVentas();
+            formVentas.Show();
         }
 
         private void btnCambiarContrasena_Click(object sender, EventArgs e)
