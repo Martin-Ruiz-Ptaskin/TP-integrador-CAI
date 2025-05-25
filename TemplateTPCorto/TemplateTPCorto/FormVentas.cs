@@ -1,4 +1,5 @@
-﻿using Datos.Ventas;
+﻿using Datos;
+using Datos.Ventas;
 using Negocio;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,7 @@ namespace TemplateTPCorto
 
             CargarClientes();
             CargarCategoriasProductos();
+
             IniciarTotales();
         }
 
@@ -61,7 +63,34 @@ namespace TemplateTPCorto
         private void btnListarProductos_Click(object sender, EventArgs e)
         {
             VentasNegocio ventasNegocio = new VentasNegocio();
+            CategoriaProductos categoriaSeleccionada = cboCategoriaProductos.SelectedItem as CategoriaProductos;
+            if (categoriaSeleccionada != null) {
+                List<Producto> productosCategoriaSeleccionada = new List<Producto>();
+                productosCategoriaSeleccionada = ventasNegocio.obtenerProductosPorCategoria(categoriaSeleccionada.Id);
+                lstProducto.SelectedIndexChanged -= lstProducto_SelectedIndexChanged;
+                lstProducto.DisplayMember = "DisplayInfo";
+                lstProducto.DataSource = productosCategoriaSeleccionada;
+                lstProducto.SelectedIndexChanged += lstProducto_SelectedIndexChanged;
 
+            }
+        }
+
+        private void cboCategoriaProductos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CategoriaProductos categoriaSeleccionada = cboCategoriaProductos.SelectedItem as CategoriaProductos;
+            if(categoriaSeleccionada!=null)
+            {
+                btnListarProductos.Enabled = true;
+            }
+        }
+
+        private void lstProducto_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Producto productoSeleccionado = lstProducto.SelectedItem as Producto;
+            if (productoSeleccionado != null)
+            {
+                Console.WriteLine(productoSeleccionado);
+            }
 
         }
     }

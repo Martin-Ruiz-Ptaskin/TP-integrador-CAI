@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -23,5 +24,14 @@ namespace Datos.Ventas
         public DateTime? FechaBaja { get => _fechaBaja; set => _fechaBaja = value; }
         public int Precio { get => _precio; set => _precio = value; }
         public int Stock { get => _stock; set => _stock = value; }
+        public string DisplayInfo
+        {
+            get
+            {
+                return $"{Nombre} - ${Precio} - Stock: {Stock}";
+            }
+        }
     }
 }
+
+   
