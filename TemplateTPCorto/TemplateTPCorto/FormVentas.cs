@@ -93,5 +93,39 @@ namespace TemplateTPCorto
             }
 
         }
+
+        private void btnAgregar_Click(object sender, EventArgs e)
+        {
+            CarritoNegocio carritoNegocio = new CarritoNegocio();
+            Producto productoSeleccionado = lstProducto.SelectedItem as Producto;
+            int cantidad;
+            if (int.TryParse(txtCantidad.Text, out cantidad))
+            {
+                bool seAgregoExitoso = carritoNegocio.AgregarProductoCarrito(productoSeleccionado, cantidad);
+                if (!seAgregoExitoso)
+                {
+                    MessageBox.Show("Error al agregar el producto al carrito");
+                }
+                else
+                {
+                    List<ProductoEnCarrito> productosDelCarrito = new List<ProductoEnCarrito>();
+                    productosDelCarrito = carritoNegocio.obtenerProductosDelCarrito();
+
+                    Carrito.SelectedIndexChanged -= Carrito_SelectedIndexChanged;
+                    Carrito.DisplayMember = "DisplayInfo";
+                    Carrito.DataSource = productosDelCarrito;
+                    Carrito.SelectedIndexChanged += Carrito_SelectedIndexChanged;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Ingrese un numero valido");
+            }
+        }
+
+        private void Carrito_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
