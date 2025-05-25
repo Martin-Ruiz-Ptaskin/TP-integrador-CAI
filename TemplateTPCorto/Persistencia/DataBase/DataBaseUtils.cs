@@ -1,9 +1,11 @@
 ﻿using Datos;
 using Datos.modelos;
+using Datos.Ventas;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -407,7 +409,60 @@ namespace Persistencia.DataBase
 
             return false;
         }
+
+        public Boolean AgregarProductoCarrito(Producto productoSeleccionado, int cantidad)
+        {
+            try
+            {
+                string rutaCarrito = Path.Combine(archivoCsv, "carrito.csv");
+
+                List<string> listadoCarrito = BuscarRegistro("carrito.csv");
+                var productoPorCargar = listadoCarrito.Where(linea =>
+                {
+                    var campos = linea.Split(';');
+                    return campos[0] != productoSeleccionado.Id.ToString();
+                }).ToList();
+                var productoEnCarritoActual = listadoCarrito.FirstOrDefault(linea =>
+                {
+                    var campos = linea.Split(';');
+                    return campos[0] == productoSeleccionado.Id.ToString();
+                });
+
+                string[] datosProducto = new string[4];
+                if (productoEnCarritoActual != null)
+                {
+                    var datosProductoEnCarrito = productoEnCarritoActual.Split(';');
+                    int cantidadActual = Convert.ToInt32(datosProductoEnCarrito[3]);
+                    int cantidadNueva = cantidadActual + cantidad;
+
+                    datosProducto[0] = datosProductoEnCarrito[0];
+                    datosProducto[1] = datosProductoEnCarrito[1];
+                    datosProducto[2] = datosProductoEnCarrito[2];
+                    datosProducto[3] = cantidadNueva.ToString();
+                }
+                else
+                {
+                    datosProducto[0] = productoSeleccionado.Id.ToString();
+                    datosProducto[1] = productoSeleccionado.Nombre;
+                    datosProducto[2] = productoSeleccionado.Precio.ToString();
+                    datosProducto[3] = cantidad.ToString();                
+                }
+
+                var productoAgregar = string.Join(";", datosProducto);
+                productoPorCargar.Add(productoAgregar);
+                File.WriteAllLines(rutaCarrito, productoPorCargar);
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Error al persistir la operacion: {e.Message}");
+            }
+
+            return false;
+        }
     }
 }
+
 
 

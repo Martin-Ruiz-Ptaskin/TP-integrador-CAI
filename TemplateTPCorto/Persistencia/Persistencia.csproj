@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CarritoPersistencia.cs" />
     <Compile Include="ClientePersistencia.cs" />
     <Compile Include="DataBase\DataBaseUtils.cs" />
     <Compile Include="OperacionesPersistencia.cs" />
@@ -56,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="DataBase\Tablas\autorizacion.csv" />
+    <None Include="DataBase\Tablas\carrito.csv" />
     <None Include="DataBase\Tablas\credenciales.csv" />
     <None Include="DataBase\Tablas\login_intentos.csv" />
     <None Include="DataBase\Tablas\operacion_cambio_credencial.csv" />
