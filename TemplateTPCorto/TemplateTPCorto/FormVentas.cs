@@ -15,9 +15,11 @@ namespace TemplateTPCorto
 {
     public partial class FormVentas : Form
     {
+        CarritoNegocio carritoNegocio = new CarritoNegocio();
         public FormVentas()
         {
             InitializeComponent();
+            carritoNegocio.limpiarCarrito();
         }
 
         private void FormVentas_Load(object sender, EventArgs e)
@@ -96,7 +98,7 @@ namespace TemplateTPCorto
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            CarritoNegocio carritoNegocio = new CarritoNegocio();
+
             Producto productoSeleccionado = lstProducto.SelectedItem as Producto;
             int cantidad;
             if (int.TryParse(txtCantidad.Text, out cantidad))
@@ -127,5 +129,27 @@ namespace TemplateTPCorto
         {
 
         }
+
+        private void btnQuitar_Click(object sender, EventArgs e)
+        {
+            CarritoNegocio carritoNegocio = new CarritoNegocio();
+            ProductoEnCarrito productoSeleccionado  = Carrito.SelectedItem as ProductoEnCarrito;
+
+            bool seQuitoExitoso = carritoNegocio.QuitarProductoCarrito(productoSeleccionado);
+            if (!seQuitoExitoso) 
+                {
+                    MessageBox.Show("Error al quitar el producto al carrito");
+                }
+                else
+                {
+                    List<ProductoEnCarrito> productosDelCarrito = new List<ProductoEnCarrito>();
+                    productosDelCarrito = carritoNegocio.obtenerProductosDelCarrito();
+
+                    Carrito.SelectedIndexChanged -= Carrito_SelectedIndexChanged;
+                    Carrito.DisplayMember = "DisplayInfo";
+                    Carrito.DataSource = productosDelCarrito;
+                    Carrito.SelectedIndexChanged += Carrito_SelectedIndexChanged;
+                }
+            }
     }
 }

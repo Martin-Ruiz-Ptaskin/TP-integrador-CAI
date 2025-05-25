@@ -1,5 +1,6 @@
 ﻿using Datos.Ventas;
 using Persistencia;
+using Persistencia.DataBase;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,9 +14,9 @@ namespace Negocio
         private CarritoPersistencia carritoPersistencia = new CarritoPersistencia();
         public Boolean AgregarProductoCarrito(Producto productoSeleccionado, int cantidad)
         {
-            if(cantidad > 0)
+            if (cantidad > 0)
             {
-                if (cantidad < productoSeleccionado.Stock)
+                if (cantidad <= productoSeleccionado.Stock)
                 {
                     return carritoPersistencia.AgregarProductoCarrito(productoSeleccionado, cantidad);
                 }
@@ -26,5 +27,15 @@ namespace Negocio
         {
             return carritoPersistencia.obtenerProductosDelCarrito();
         }
+
+        public Boolean QuitarProductoCarrito(ProductoEnCarrito productoSeleccionado)
+        {
+            return carritoPersistencia.QuitarProductoCarrito(productoSeleccionado);
+        }
+        public void limpiarCarrito()
+        {
+            carritoPersistencia.limpiarCarrito();
+        }
     }
+
 }
