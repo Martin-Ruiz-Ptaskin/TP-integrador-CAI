@@ -461,18 +461,42 @@ namespace Persistencia.DataBase
 
             return false;
         }
+        public int ObtenerCantidadProductoEnCarrito(Guid productoId)
+        {
+            string rutaCarrito = Path.Combine(archivoCsv, "carrito.csv");
+            if (!File.Exists(rutaCarrito)) return 0;
+
+            var lineas = File.ReadAllLines(rutaCarrito);
+            foreach (var linea in lineas)
+            {
+                var campos = linea.Split(';');
+                if (campos.Length >= 4 && campos[0] == productoId.ToString())
+                {
+                    int cantidad;
+                    if (int.TryParse(campos[3], out cantidad))
+                        return cantidad;
+                }
+            }
+            return 0;
+        }
+
 
         public bool QuitarProductoCarrito(ProductoEnCarrito producto)
         {
             try
             {
+                if (producto == null || producto.Id == null)
+                    return false;
                 string rutaCarrito = Path.Combine(archivoCsv, "carrito.csv");
-
                 List<string> listadoCarrito = BuscarRegistro("carrito.csv");
 
+                if (listadoCarrito == null)
+                    return true; 
                 var nuevoListado = listadoCarrito.Where(linea =>
                 {
+                    if (string.IsNullOrEmpty(linea)) return false;
                     var campos = linea.Split(';');
+                    if (campos.Length == 0) return false;
                     return campos[0] != producto.Id.ToString();
                 }).ToList();
 
@@ -489,7 +513,7 @@ namespace Persistencia.DataBase
         }
         public void limpiarCarrito()
         {
-        
+
             try
             {
                 string rutaCarrito = Path.Combine(archivoCsv, "carrito.csv");
@@ -509,7 +533,27 @@ namespace Persistencia.DataBase
             {
                 Console.WriteLine($"Error al limpiar carrito: {e.Message}");
             }
+        }
 
+        public int  calcularSubTotal()
+        {
+            int subtotal=0;
+
+            string rutaCarrito = Path.Combine(archivoCsv, "carrito.csv");
+
+            List<string> listadoCarrito = BuscarRegistro("carrito.csv");
+            
+            
+            foreach (var linea in listadoCarrito)
+            {
+                if (linea.StartsWith("Id")) continue;
+
+                var campos = linea.Split(';');
+                int precio = int.Parse(campos[2]);
+                int cantidad = int.Parse(campos[3]);
+                subtotal += precio * cantidad;
+            }
+            return subtotal;
         }
 
 

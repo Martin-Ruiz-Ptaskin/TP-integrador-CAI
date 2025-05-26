@@ -16,13 +16,16 @@ namespace Negocio
         {
             if (cantidad > 0)
             {
-                if (cantidad <= productoSeleccionado.Stock)
+                int cantidadEnCarrito = carritoPersistencia.ObtenerCantidadProductoEnCarrito(productoSeleccionado.Id);
+
+                if ((cantidadEnCarrito + cantidad) <= productoSeleccionado.Stock)
                 {
                     return carritoPersistencia.AgregarProductoCarrito(productoSeleccionado, cantidad);
                 }
             }
             return false;
         }
+
         public List<ProductoEnCarrito> obtenerProductosDelCarrito()
         {
             return carritoPersistencia.obtenerProductosDelCarrito();
@@ -35,6 +38,25 @@ namespace Negocio
         public void limpiarCarrito()
         {
             carritoPersistencia.limpiarCarrito();
+        }
+        public int calcularSubTotal()
+        {
+           return carritoPersistencia.calcularSubTotal();
+        }
+        public double calcularTotal()
+        {
+            double total = 0;
+            int subtotal = calcularSubTotal();
+            if (subtotal > 1000000)
+            {
+                total = subtotal * 0.85;
+
+            }
+            else
+            {
+                total = subtotal;
+            }
+            return total;
         }
     }
 
