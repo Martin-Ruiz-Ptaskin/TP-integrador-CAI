@@ -24,6 +24,17 @@ namespace Persistencia
             }
             return false;
         }
+        public int ObtenerCantidadProductoEnCarrito(Guid productoId)
+        {
+            try
+            {
+                return dataBaseUtils.ObtenerCantidadProductoEnCarrito(productoId);
+            }
+            catch
+            {
+                return 0;
+            }
+        }
 
         public Boolean QuitarProductoCarrito(ProductoEnCarrito productoSeleccionado)
         {
@@ -79,6 +90,20 @@ namespace Persistencia
             {
                 Console.WriteLine($"Error en el método Limpiar carrito: {ex.Message}");
             }
+        }
+        public int calcularSubTotal()
+        {
+            try
+            {
+               return dataBaseUtils.calcularSubTotal();
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error en el actualizar subtotales: {ex.Message}");
+            }
+            return 0;
+
         }
     }
 }

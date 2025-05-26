@@ -106,7 +106,7 @@ namespace TemplateTPCorto
                 bool seAgregoExitoso = carritoNegocio.AgregarProductoCarrito(productoSeleccionado, cantidad);
                 if (!seAgregoExitoso)
                 {
-                    MessageBox.Show("Error al agregar el producto al carrito");
+                    MessageBox.Show("No hay stock suficiente para agregar esa cantidad o error al agregar el producto.");
                 }
                 else
                 {
@@ -117,6 +117,8 @@ namespace TemplateTPCorto
                     Carrito.DisplayMember = "DisplayInfo";
                     Carrito.DataSource = productosDelCarrito;
                     Carrito.SelectedIndexChanged += Carrito_SelectedIndexChanged;
+                    lablSubTotal.Text = carritoNegocio.calcularSubTotal().ToString();
+                    lblTotal.Text = carritoNegocio.calcularTotal().ToString();
                 }
             }
             else
@@ -133,23 +135,30 @@ namespace TemplateTPCorto
         private void btnQuitar_Click(object sender, EventArgs e)
         {
             CarritoNegocio carritoNegocio = new CarritoNegocio();
-            ProductoEnCarrito productoSeleccionado  = Carrito.SelectedItem as ProductoEnCarrito;
+            ProductoEnCarrito productoSeleccionado = Carrito.SelectedItem as ProductoEnCarrito;
+
+            if (productoSeleccionado == null)
+            {
+                return;
+            }
 
             bool seQuitoExitoso = carritoNegocio.QuitarProductoCarrito(productoSeleccionado);
-            if (!seQuitoExitoso) 
-                {
-                    MessageBox.Show("Error al quitar el producto al carrito");
-                }
-                else
-                {
+            if (!seQuitoExitoso)
+            {
+                MessageBox.Show("Error al quitar el producto del carrito");
+            }
+            else
+            {
                     List<ProductoEnCarrito> productosDelCarrito = new List<ProductoEnCarrito>();
                     productosDelCarrito = carritoNegocio.obtenerProductosDelCarrito();
 
-                    Carrito.SelectedIndexChanged -= Carrito_SelectedIndexChanged;
-                    Carrito.DisplayMember = "DisplayInfo";
-                    Carrito.DataSource = productosDelCarrito;
-                    Carrito.SelectedIndexChanged += Carrito_SelectedIndexChanged;
-                }
+                Carrito.SelectedIndexChanged -= Carrito_SelectedIndexChanged;
+                Carrito.DisplayMember = "DisplayInfo";
+                Carrito.DataSource = productosDelCarrito;
+                Carrito.SelectedIndexChanged += Carrito_SelectedIndexChanged;
+                lablSubTotal.Text = carritoNegocio.calcularSubTotal().ToString();
+                lblTotal.Text = carritoNegocio.calcularTotal().ToString();
             }
+        }
     }
 }
