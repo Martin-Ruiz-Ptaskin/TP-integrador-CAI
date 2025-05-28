@@ -16,6 +16,8 @@ namespace TemplateTPCorto
     public partial class FormVentas : Form
     {
         CarritoNegocio carritoNegocio = new CarritoNegocio();
+        private Cliente clienteSeleccionado;
+
         public FormVentas()
         {
             InitializeComponent();
@@ -158,6 +160,36 @@ namespace TemplateTPCorto
                 Carrito.SelectedIndexChanged += Carrito_SelectedIndexChanged;
                 lablSubTotal.Text = carritoNegocio.calcularSubTotal().ToString();
                 lblTotal.Text = carritoNegocio.calcularTotal().ToString();
+            }
+        }
+
+        private void btnCargar_Click(object sender, EventArgs e)
+        {
+
+            VentasNegocio ventasNegocio = new VentasNegocio();
+            try
+            {
+                ventasNegocio.concluirVenta(clienteSeleccionado.Id.ToString());
+                carritoNegocio.limpiarCarrito();
+                Carrito.DataSource = null;
+
+                MessageBox.Show("¡Venta realizada con éxito!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al realizar la venta: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
+
+        private void cmbClientes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            clienteSeleccionado = cmbClientes.SelectedItem as Cliente;
+            // Opcional: puedes validar si es null
+            if (clienteSeleccionado != null)
+            {
+                // Aquí puedes usar clienteSeleccionado
+                Console.WriteLine($"Cliente seleccionado: {clienteSeleccionado.Nombre} {clienteSeleccionado.Apellido}");
             }
         }
     }
