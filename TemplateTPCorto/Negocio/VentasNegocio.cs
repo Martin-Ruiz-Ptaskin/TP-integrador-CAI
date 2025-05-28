@@ -1,4 +1,6 @@
-﻿using Datos.Ventas;
+﻿using Datos;
+using Datos.modelos;
+using Datos.Ventas;
 using Persistencia;
 using System;
 using System.Collections.Generic;
@@ -42,7 +44,7 @@ namespace Negocio
 
             return categoriaProductos;
         }
-        
+
         public List<Producto> obtenerProductosPorCategoria(string idCategoria)
         {
             List<Producto> productos = new List<Producto>();
@@ -59,5 +61,28 @@ namespace Negocio
             return productosConStock;
         }
 
+        public void concluirVenta(String cliente)
+        {
+            List<ProductoEnCarrito> productosDelCarrito = new List<ProductoEnCarrito>();
+            VentaPersistencia ventaPersistencia = new VentaPersistencia();
+
+            CarritoNegocio carritoNegocio = new CarritoNegocio();
+
+            Persona usuario = AppState.UsuarioActual;
+            productosDelCarrito = carritoNegocio.obtenerProductosDelCarrito();
+            foreach (ProductoEnCarrito producto in productosDelCarrito)
+            {
+                VentaItemRequest ventaItem = new VentaItemRequest(cliente, producto.Id, producto.Cantidad);
+                try
+                {
+                    ventaPersistencia.agregarVenta(ventaItem);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                    throw new Exception($"Error al agregar la venta del producto {producto.Nombre}: {ex.Message}", ex);
+                }
+            }
+        }
     }
 }
