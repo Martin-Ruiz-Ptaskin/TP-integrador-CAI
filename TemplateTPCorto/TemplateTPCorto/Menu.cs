@@ -87,5 +87,19 @@ namespace TemplateTPCorto
             FormCambioContrasena formCambioObligatorioContrasena = new FormCambioContrasena(credencial);
             formCambioObligatorioContrasena.Show();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            FormLogin formLogin = new FormLogin();
+            formLogin.Show();
+
+            foreach (Form form in Application.OpenForms.Cast<Form>().ToList())
+            {
+                if (!(form is FormLogin))
+                {
+                    form.Close();
+                }
+            }
+        }
     }
 }
