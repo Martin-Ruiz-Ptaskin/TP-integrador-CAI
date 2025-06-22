@@ -37,50 +37,61 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(47, 18);
+            this.label1.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(144, 9);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(210, 16);
+            this.label1.Size = new System.Drawing.Size(326, 22);
             this.label1.TabIndex = 0;
             this.label1.Text = "Cambio obligatorio de contraseña";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(47, 97);
+            this.label2.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(192, 93);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(179, 16);
+            this.label2.Size = new System.Drawing.Size(192, 17);
             this.label2.TabIndex = 1;
             this.label2.Text = "Ingrese su nueva contraseña";
             // 
             // NuevaContrasenaTxt
             // 
-            this.NuevaContrasenaTxt.Location = new System.Drawing.Point(50, 126);
+            this.NuevaContrasenaTxt.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NuevaContrasenaTxt.Location = new System.Drawing.Point(195, 122);
+            this.NuevaContrasenaTxt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.NuevaContrasenaTxt.Name = "NuevaContrasenaTxt";
-            this.NuevaContrasenaTxt.Size = new System.Drawing.Size(100, 22);
+            this.NuevaContrasenaTxt.Size = new System.Drawing.Size(189, 23);
             this.NuevaContrasenaTxt.TabIndex = 2;
             this.NuevaContrasenaTxt.TextChanged += new System.EventHandler(this.NuevaContrasenaTxt_TextChanged);
             // 
             // NuevaContrasenaBtn
             // 
+            this.NuevaContrasenaBtn.BackColor = System.Drawing.SystemColors.MenuHighlight;
             this.NuevaContrasenaBtn.Enabled = false;
-            this.NuevaContrasenaBtn.Location = new System.Drawing.Point(50, 165);
+            this.NuevaContrasenaBtn.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NuevaContrasenaBtn.ForeColor = System.Drawing.SystemColors.Control;
+            this.NuevaContrasenaBtn.Location = new System.Drawing.Point(195, 161);
+            this.NuevaContrasenaBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.NuevaContrasenaBtn.Name = "NuevaContrasenaBtn";
-            this.NuevaContrasenaBtn.Size = new System.Drawing.Size(80, 29);
+            this.NuevaContrasenaBtn.Size = new System.Drawing.Size(189, 24);
             this.NuevaContrasenaBtn.TabIndex = 3;
             this.NuevaContrasenaBtn.Text = "Confirmar";
-            this.NuevaContrasenaBtn.UseVisualStyleBackColor = true;
+            this.NuevaContrasenaBtn.UseVisualStyleBackColor = false;
             this.NuevaContrasenaBtn.Click += new System.EventHandler(this.NuevaContrasenaBtn_Click);
             // 
-            // FormCambioObligatorioContrasena
+            // FormCambioContrasena
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(600, 366);
             this.Controls.Add(this.NuevaContrasenaBtn);
             this.Controls.Add(this.NuevaContrasenaTxt);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Name = "FormCambioObligatorioContrasena";
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Name = "FormCambioContrasena";
             this.Text = "CambioObligatorioContrasena";
             this.ResumeLayout(false);
             this.PerformLayout();
